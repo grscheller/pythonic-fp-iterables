@@ -12,10 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from dtools.containers.maybe import MayBe as MB
-from dtools.iterables import reduce_left, foldl, mb_fold_left
-from dtools.iterables import sc_reduce_left, sc_reduce_right
-from dtools.fp.function import swap, partial
+from pythonic_fp.containers.maybe import MayBe as MB
+from pythonic_fp.iterables import reduce_left, foldl, mb_fold_left
+from pythonic_fp.iterables import sc_reduce_left, sc_reduce_right
+from pythonic_fp.fptools.function import swap, partial
 
 
 def add(a: int, b: int) -> int:

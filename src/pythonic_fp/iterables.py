@@ -36,10 +36,10 @@ __license__ = 'Apache License 2.0'
 from collections.abc import Callable, Iterable, Iterator
 from enum import auto, Enum
 from typing import cast, Never, TypeVar
-from dtools.containers.box import Box
-from dtools.containers.maybe import MayBe as MB
-from dtools.fp.function import negate, swap
-from dtools.fp.singletons import NoValue
+from pythonic_fp.containers.box import Box
+from pythonic_fp.containers.maybe import MayBe as MB
+from pythonic_fp.fptools.function import negate, swap
+from pythonic_fp.fptools.singletons import NoValue
 
 __all__ = [
     'FM',

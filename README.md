@@ -1,13 +1,13 @@
-# Developer Tools - Tools for iterables and iterators
+# Pythonic FP - Tools for iterables and iterators
 
 Tools for iterables and iterators. This project is part of the
-[Developer Tools for Python][4] **dtools** namespace project.
+[Pythonic FP][1] **pythonic-fp** PyPI namespace projects.
 
 - **Repositories**
-  - [dtools.iterables][1] project on *PyPI*
-  - [Source code][2] on *GitHub*
-- Detailed documentation for dtools.fp
-  - [Detailed API documentation][3] on *GH-Pages*
+  - [pythonic-fp.iterables][2] project on *PyPI*
+  - [Source code][3] on *GitHub*
+- Detailed documentation for pythonic-fp.fptools
+  - [Detailed API documentation][4] on *GH-Pages*
 
 ## Overview
 
@@ -22,7 +22,7 @@ Tools for iterables and iterators. This project is part of the
 
 ______________________________________________________________________
 
-[1]: https://pypi.org/project/dtools.iterables/
-[2]: https://github.com/grscheller/dtools-iterables/
-[3]: https://grscheller.github.io/dtools-namespace-projects/iterables/
-[4]: https://github.com/grscheller/dtools-namespace-projects/blob/main/README.md
+[1]: https://github.com/grscheller/pythonic-fp/blob/main/README.md
+[2]: https://pypi.org/project/pythonic-fp.iterables/
+[3]: https://github.com/grscheller/pythonic-fp-iterables/
+[4]: https://grscheller.github.io/pythonic-fp/maintained/iterables/

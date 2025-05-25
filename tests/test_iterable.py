@@ -12,11 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from dtools.iterables import concat, merge, exhaust
-from dtools.iterables import accumulate
-from dtools.iterables import drop, drop_while
-from dtools.iterables import take, take_while
-from dtools.iterables import take_split, take_while_split
+from pythonic_fp.iterables import concat, merge, exhaust
+from pythonic_fp.iterables import accumulate
+from pythonic_fp.iterables import drop, drop_while
+from pythonic_fp.iterables import take, take_while
+from pythonic_fp.iterables import take_split, take_while_split
 
 
 class Test_fp_iterables:
