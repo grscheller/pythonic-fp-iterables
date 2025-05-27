@@ -24,7 +24,7 @@ keywords = [
     "iterators",
 ]
 dependencies = [
-    "pythonic-fp.circulararray>=5.0.0, <5.1",
+    "pythonic-fp.circulararray>=5.1.0, <5.2",
     "pythonic-fp.containers >=2.0.0, <2.1",
     "pythonic-fp.fptools >=3.0.0, <3.1",
 ]
