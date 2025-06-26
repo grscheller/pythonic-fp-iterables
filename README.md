@@ -8,7 +8,7 @@ Detailed API
 [documentation](https://grscheller.github.io/pythonic-fp/maintained/iterables)
 on *GH-Pages*.
 
-## Features
+## Features:
 
 - Concatenating and merging iterables
 - Dropping and taking values from iterables
@@ -55,13 +55,13 @@ take_while_split(ds, pred) | like take_while, second iterator yields remaining v
 | sc_reduce_left | short circuit version of a left reduce |
 | sc_reduce_right | short circuit version of a right reduce |
 
-## Installation
+## Installation:
 
 ```
     $ pip install pythonic-fp.iterables
 ```
 
-## Contribute
+## Contribute:
 
 - Project on PyPI: https://pypi.org/project/pythonic-fp.iterables
 - Source Code: https://github.com/grscheller/pythonic-fp-iterables
@@ -71,7 +71,7 @@ take_while_split(ds, pred) | like take_while, second iterator yields remaining v
 
 | Contributors | Name | Role |
 |:------------ |:---- |:---- |
-| [@grscheller](https://github.com/grscheller) | Geoffrey R. Scheller | author, maintainer |
+| [grscheller](https://github.com/grscheller) | Geoffrey R. Scheller | author, maintainer |
 
 ### License Information
 
