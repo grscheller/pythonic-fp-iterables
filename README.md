@@ -55,28 +55,15 @@ take_while_split(ds, pred) | like take_while, second iterator yields remaining v
 | sc_reduce_left | short circuit version of a left reduce |
 | sc_reduce_right | short circuit version of a right reduce |
 
-## Installation:
+This PyPI project is part of of the grscheller
+[pythonic-fp namespace projects](https://grscheller.github.io/pythonic-fp/).
 
-```
-    $ pip install pythonic-fp.iterables
-```
+## Documentation
 
-## Contribute:
+Documentation hosted on
+[GitHub Pages](https://grscheller.github.io/pythonic-fp-iterables/).
 
-- Project on PyPI: https://pypi.org/project/pythonic-fp.iterables
-- Source Code: https://github.com/grscheller/pythonic-fp-iterables
-- Issue Tracker: https://github.com/grscheller/pythonic-fp-iterables/issues
-- Pull Requests: https://github.com/grscheller/pythonic-fp-iterables/pulls
-- CHANGELOG: https://github.com/grscheller/pythonic-fp-iterables/blob/main/CHANGELOG.rst
+## Copyright and License
 
-| Contributors | Name | Role |
-|:------------ |:---- |:---- |
-| [grscheller](https://github.com/grscheller) | Geoffrey R. Scheller | author, maintainer |
-
-### License Information
-
-This project is licensed under the Apache License Version 2.0, January 2004.
-
-See the
-[LICENCE file](https://github.com/grscheller/pythonic-fp-iterables/blob/main/LICENSE)
-for details.
+Copyright (c) 2023-2025 Geoffrey R. Scheller. Licensed under the Apache
+License, Version 2.0. See the LICENSE file for details.
