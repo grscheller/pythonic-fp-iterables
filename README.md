@@ -19,42 +19,6 @@ on *GH-Pages*.
     - all iterators are assumed to be iterable
     - for all iterators `my_iter` we assume `iter(my_iter) is my_iter`
 
-### Functions to merge iterables
-
-- concat: concatenate multiple iterables sequentially
-- exhaust: shuffle together multiple iterables until all are exhausted
-- merge: shuffle together multiple iterables until one is exhausted
-
-### Dropping and taking
-
-| function | return iterator yielding values from ds |
-|:-------- |:--------------------------------------- |
-| drop(ds, n) | with first n values of ds dropped |
-| drop_while(ds, pred) | dropping values until predicate false |
-| take(ds, n) | yielding first n values of ds |
-| take_while(ds, pred) | yielding values from ds while predicate true |
-
-| function | return a pair of iterators |
-|:-------- |:-------------------------- |
-take_split(ds, n) | like take but second iterator yields remaining values |
-take_while_split(ds, pred) | like take_while, second iterator yields remaining values |
-
-### Functions to accumulate and reduce
-
-| function | description |
-|:-------- |:----------- |
-| accumulate | pure Python version of std library's itertools.accumulate |
-| reduce_left | fold an iterable left with a function |
-| fold_left | fold an iterable left with a function and initial value |
-| mb_fold_left | fold an iterable left with a function and optional initial value |
-
-### Shortcut versions of reduce - useful with infinite iterables
-
-| function | description |
-|:-------- |:----------- |
-| sc_reduce_left | short circuit version of a left reduce |
-| sc_reduce_right | short circuit version of a right reduce |
-
 This PyPI project is part of of the grscheller
 [pythonic-fp namespace projects](https://grscheller.github.io/pythonic-fp/).
 
