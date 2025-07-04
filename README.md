@@ -1,14 +1,8 @@
 # Pythonic FP - Tools for iterables
 
-Tools to create iterators from iterables, part of the PyPI
-[pythonic-fp](https://github.com/grscheller/pythonic-fp/blob/main/README.rst)
-Namespace Projects.
-
-Detailed API
-[documentation](https://grscheller.github.io/pythonic-fp/maintained/iterables)
-on *GH-Pages*.
-
-## Features:
+PyPI project
+[pythonic-fp.iterators](https://pypi.org/project/pythonic-fp.iterables/)
+implementing a Python package of container like data structures.
 
 - Concatenating and merging iterables
 - Dropping and taking values from iterables
@@ -25,7 +19,7 @@ This PyPI project is part of of the grscheller
 ## Documentation
 
 Documentation hosted on
-[GitHub Pages](https://grscheller.github.io/pythonic-fp-iterables/).
+[GitHub Pages](https://grscheller.github.io/pythonic-fp-iterables/html).
 
 ## Copyright and License
 
