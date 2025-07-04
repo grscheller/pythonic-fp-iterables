@@ -14,7 +14,7 @@ implementing a Python package of container like data structures.
     - for all iterators `my_iter` we assume `iter(my_iter) is my_iter`
 
 This PyPI project is part of of the grscheller
-[pythonic-fp namespace projects](https://grscheller.github.io/pythonic-fp/).
+[pythonic-fp namespace projects](https://github.com/grscheller/pythonic-fp/blob/main/README.md).
 
 ## Documentation
 
