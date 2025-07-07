@@ -20,11 +20,12 @@ Library of iterator related functions and enumerations.
 - Dropping and taking values from iterables
 - Reducing and accumulating iterables
 - Assumptions
+
   - iterables are not necessarily iterators
   - at all times iterator protocol is assumed to be followed
-    - all iterators are assumed to be iterable
-    - for all iterators `foo` we assume `iter(foo) is foo`
 
+    - all iterators are assumed to be iterable
+    - for all iterators ``foo`` we assume ``iter(foo) is foo``
 """
 
 from __future__ import annotations
@@ -72,7 +73,6 @@ class FM(Enum):
     - **CONCAT:** Concatenate first to last
     - **MERGE:** Merge until one is exhausted
     - **EXHAUST:** Merge until all are exhausted
-
     """
 
     CONCAT = auto()
@@ -83,11 +83,10 @@ class FM(Enum):
 def concat[D](*iterables: Iterable[D]) -> Iterator[D]:
     """Sequentially concatenate multiple iterables together.
 
-    * pure Python version of standard library's `itertools.chain`
-    * iterator sequentially yields each iterable until all are exhausted
-    * an infinite iterable will prevent subsequent iterables from yielding any values
-    * performant to `itertools.chain`
-
+    - pure Python version of standard library's ``itertools.chain``
+    - iterator sequentially yields each iterable until all are exhausted
+    - an infinite iterable will prevent subsequent iterables from yielding any values
+    - performant to ``itertools.chain``
     """
     for iterator in map(lambda x: iter(x), iterables):
         while True:
@@ -100,9 +99,7 @@ def concat[D](*iterables: Iterable[D]) -> Iterator[D]:
 
 def exhaust[D](*iterables: Iterable[D]) -> Iterator[D]:
     """Shuffle together multiple iterables until all are exhausted.
-
-    * iterator yields until all iterables are exhausted
-
+    Iterator yields until all iterables are exhausted.
     """
     iter_list = list(map(lambda x: iter(x), iterables))
     if (num_iters := len(iter_list)) > 0:
@@ -126,14 +123,15 @@ def exhaust[D](*iterables: Iterable[D]) -> Iterator[D]:
 
 
 def merge[D](*iterables: Iterable[D], yield_partials: bool = False) -> Iterator[D]:
-    """Shuffle together the `iterables` until one is exhausted.
+    """Shuffle together the ``iterables`` until one is exhausted.
 
-    * iterator yields until one of the iterables is exhausted
-    * if `yield_partials` is true,
-      * yield any unmatched yielded values from other iterables
-      * prevents data lose
-        * if any of the iterables are iterators with external references
+    - iterator yields until one of the iterables is exhausted
+    - if ``yield_partials`` is true,
 
+      - yield any unmatched yielded values from other iterables
+      - prevents data lose
+
+        - if any of the iterables are iterators with external references
     """
     iter_list = list(map(lambda x: iter(x), iterables))
     values = []
@@ -154,7 +152,7 @@ def merge[D](*iterables: Iterable[D], yield_partials: bool = False) -> Iterator[
 
 
 def drop[D](iterable: Iterable[D], n: int, /) -> Iterator[D]:
-    """Drop the next `n` values from `iterable`."""
+    """Drop the next ``n`` values from ``iterable``."""
     it = iter(iterable)
     for _ in range(n):
         try:
@@ -165,7 +163,7 @@ def drop[D](iterable: Iterable[D], n: int, /) -> Iterator[D]:
 
 
 def drop_while[D](iterable: Iterable[D], pred: Callable[[D], bool], /) -> Iterator[D]:
-    """Drop initial values from `iterable` while predicate is true."""
+    """Drop initial values from ``iterable`` while predicate is true."""
     it = iter(iterable)
     while True:
         try:
@@ -179,7 +177,7 @@ def drop_while[D](iterable: Iterable[D], pred: Callable[[D], bool], /) -> Iterat
 
 
 def take[D](iterable: Iterable[D], n: int, /) -> Iterator[D]:
-    """Return an iterator of up to `n` initial values of an iterable"""
+    """Return an iterator of up to ``n`` initial values of an iterable"""
     it = iter(iterable)
     for _ in range(n):
         try:
@@ -192,11 +190,12 @@ def take[D](iterable: Iterable[D], n: int, /) -> Iterator[D]:
 def take_split[D](iterable: Iterable[D], n: int, /) -> tuple[Iterator[D], Iterator[D]]:
     """Same as take except also return an iterator of the remaining values.
 
-    * return a tuple of
-      * an iterator of up to `n` initial values
-      * an iterator of the remaining vales of the `iterable`
-    * Contract: do not access second iterator until first is exhausted
+    - return a tuple of
 
+      - an iterator of up to ``n`` initial values
+      - an iterator of the remaining vales of the ``iterable``
+
+    - Contract: do not access second iterator until first is exhausted
     """
     it = iter(iterable)
     itn = take(it, n)
@@ -205,9 +204,10 @@ def take_split[D](iterable: Iterable[D], n: int, /) -> tuple[Iterator[D], Iterat
 
 
 def take_while[D](iterable: Iterable[D], pred: Callable[[D], bool], /) -> Iterator[D]:
-    """Yield values from `iterable` while predicate is true.
+    """Yield values from ``iterable`` while predicate is true.
 
-    Warning: risk of value loss if iterable is multiple referenced iterator.
+    .. warning::
+        Risk of value loss if iterable is multiple referenced iterator.
     """
     it = iter(iterable)
     while True:
@@ -224,13 +224,14 @@ def take_while[D](iterable: Iterable[D], pred: Callable[[D], bool], /) -> Iterat
 def take_while_split[D](
     iterable: Iterable[D], pred: Callable[[D], bool], /
 ) -> tuple[Iterator[D], Iterator[D]]:
-    """Yield values from `iterable` while `predicate` is true.
+    """Yield values from ``iterable`` while ``predicate`` is true.
 
-    * return a tuple of two iterators
-      * first of initial values where predicate is true, followed by first to fail
-      * second of the remaining values of the iterable after first failed value
-    * Contract: do not access second iterator until first is exhausted
+    - return a tuple of two iterators
 
+      - first of initial values where predicate is true, followed by first to fail
+      - second of the remaining values of the iterable after first failed value
+
+    - **Contract:** do not access second iterator until first is exhausted
     """
 
     def _take_while(
@@ -261,10 +262,9 @@ def accumulate[D, L](
 ) -> Iterator[L]:
     """Returns an iterator of accumulated values.
 
-    * pure Python version of standard library's `itertools.accumulate`
-    * function `f` does not default to addition (for typing flexibility)
-    * begins accumulation with an optional `initial` value
-
+    - pure Python version of standard library's ``itertools.accumulate``
+    - function ``f`` does not default to addition (for typing flexibility)
+    - begins accumulation with an optional ``initial`` value
     """
     it = iter(iterable)
     try:
@@ -293,11 +293,10 @@ def accumulate[D, L](
 def reduce_left[D](iterable: Iterable[D], f: Callable[[D, D], D], /) -> D | Never:
     """Fold an iterable left with a function.
 
-    * traditional FP type order given for function `f`
-    * if iterable empty, `StopIteration` exception raised
-    * does not catch any exceptions `f` may raise
-    * never returns if `iterable` generates an infinite iterator
-
+    - traditional FP type order given for function ``f``
+    - if iterable empty, ``StopIteration`` exception raised
+    - does not catch any exceptions ``f`` may raise
+    - never returns if ``iterable`` generates an infinite iterator
     """
     it = iter(iterable)
     try:
@@ -317,14 +316,15 @@ def foldl[D, L](
 ) -> L | Never:
     """Folds an iterable left with a function and initial value.
 
-    * traditional FP type order given for function `f`
-    * does not catch any exceptions `f` may raise
-    * like builtin `sum` for Python >=3.8 except
-      - not restricted to __add__ for the folding function
-      - initial value required, does not default to `0` for initial value
-      - handles non-numeric data just find
-    * never returns if `iterable` generates an infinite iterator
+    - traditional FP type order given for function ``f``
+    - does not catch any exceptions ``f`` may raise
+    - like builtin ``sum`` for Python >=3.8 except
 
+      - not restricted to ``__add__`` for the folding function
+      - initial value required, does not default to ``0`` for initial value
+      - handles non-numeric data just find
+
+    - never returns if ``iterable`` generates an infinite iterator
     """
     acc = initial
     for v in iterable:
@@ -337,11 +337,10 @@ def mb_fold_left[L, D](
 ) -> MB[L]:
     """Folds an iterable left with optional initial value.
 
-    * traditional FP type order given for function `f`
-    * when an initial value is not given then `~L = ~D`
-    * if iterable empty and no `initial` value given, return `MB()`
-    * never returns if iterable generates an infinite iterator
-
+    - traditional FP type order given for function ``f``
+    - when an initial value is not given then ``~L = ~D``
+    - if iterable empty and no ``initial`` value given, return ``MB()``
+    - never returns if iterable generates an infinite iterator
     """
     acc: L
     it = iter(iterable)
@@ -373,13 +372,14 @@ def sc_reduce_left[D](
 ) -> tuple[MB[D], Iterator[D]]:
     """Short circuit version of a left reduce. Useful for infinite or iterables.
 
-    * Behavior for default arguments will
-      * left reduce finite iterable
-      * start folding immediately
-      * continue folding until end (of a possibly infinite iterable)
-    * Callable `start` delays starting the left reduce
-    * Callable `stop` prematurely stop the left reduce
+    - Behavior for default arguments will
 
+      - left reduce finite iterable
+      - start folding immediately
+      - continue folding until end (of a possibly infinite iterable)
+
+    - Callable ``start`` delays starting the left reduce
+    - Callable ``stop`` prematurely stop the left reduce
     """
     it_start = drop_while(iterable, negate(start))
     if not include_start:
@@ -418,13 +418,14 @@ def sc_reduce_right[D](
     """Short circuit version of a right reduce. Useful for infinite or
     non-reversible iterables.
 
-    * Behavior for default arguments will
-      * right reduce finite iterable
-      * start reducing at end (of a possibly infinite iterable)
-      * continue reducing right until beginning
-    * Callable `start` prematurely starts the right reduce
-    * Callable `stop` prematurely stops the right reduce
+    - Behavior for default arguments will
 
+      - right reduce finite iterable
+      - start reducing at end (of a possibly infinite iterable)
+      - continue reducing right until beginning
+
+    - Callable ``start`` prematurely starts the right reduce
+    - Callable ``stop`` prematurely stops the right reduce
     """
     it_start, it_rest = take_while_split(iterable, negate(start))
     l1 = list(it_start)

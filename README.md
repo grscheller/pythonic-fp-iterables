@@ -2,7 +2,7 @@
 
 PyPI project
 [pythonic-fp.iterators](https://pypi.org/project/pythonic-fp.iterables/)
-implementing a Python package of container like data structures.
+implementing a Python package of tools for iterables and iterators.
 
 - Concatenating and merging iterables
 - Dropping and taking values from iterables
