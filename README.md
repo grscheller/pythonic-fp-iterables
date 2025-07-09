@@ -18,8 +18,9 @@ This PyPI project is part of of the grscheller
 
 ## Documentation
 
-Documentation hosted on
-[GitHub Pages](https://grscheller.github.io/pythonic-fp-iterables/html).
+Documentation for package
+[GitHub Pages](https://grscheller.github.io/pythonic-fp-iterables/html/api_pypi.html)
+hosted on GitHub pages.
 
 ## Copyright and License
 

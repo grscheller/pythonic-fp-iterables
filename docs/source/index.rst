@@ -1,15 +1,9 @@
-.. Pythonic FP - Circular Array documentation master file, created by
-   sphinx-quickstart on Fri Jun 27 11:13:22 2025.
-   To regenerate the documentation do: ``$ Sphinx-build -M html docs/source/ docs/build/``
-   from the root repo directory.
+..
+   Pythonic FP - Iterables documentation master file. To regenerate the sphinx
+   documentation do: "$ make html" from the "docs/" directory.
 
-Pythonic FP - Iterables project
-===============================
-
-Part of of the `pythonic-fp namespace projects <https://github.com/grscheller/pythonic-fp/blob/main/README.md>`_.
-
-Overview
---------
+Pythonic FP - Iterables
+=======================
 
 PyPI project `pythonic.iterables <https://pypi.org/project/pythonic-fp.iterables/>`_
 implementing a Python package of tools for iterables and iterators.
@@ -18,12 +12,15 @@ implementing a Python package of tools for iterables and iterators.
 - Dropping and taking values from iterables
 - Reducing and accumulating iterables
 - Assumptions
-   
+
   - iterables are not necessarily iterators
   - at all times iterator protocol is assumed to be followed
-     
+
     - all iterators are assumed to be iterable
     - for all iterators `my_iter` we assume `iter(my_iter) is my_iter`
+
+Part of of the
+`pythonic-fp namespace projects <https://github.com/grscheller/pythonic-fp/blob/main/README.md>`_.
 
 Documentation
 -------------
@@ -37,10 +34,11 @@ Documentation
 Development
 -----------
 
-:doc:`changelog`
-    CHANGELOG for the current and predecessor projects.
+:doc:`Current Development API <api>`
+    Development environment API documentation.
 
-.. Hidden TOCs
+:doc:`CHANGELOG <changelog>`
+    For the current and predecessor projects.
 
 .. toctree::
    :caption: Documentation
@@ -48,12 +46,19 @@ Development
    :hidden:
 
    installing
+   api_pypi
    api
 
 .. toctree::
    :caption: Development
-   :maxdepth: 2
+   :maxdepth: 1
    :hidden:
 
    changelog
 
+.. toctree::
+   :caption: Back to start
+   :maxdepth: 1
+   :hidden:
+
+   self
