@@ -1,8 +1,8 @@
-pythonic-fp.circulararray API
+pythonic_fp.iterables API
 =============================
 
-Detailed Documentation
-----------------------
+Iterables Module
+----------------
 
 .. automodule:: pythonic_fp.iterables
    :members:
