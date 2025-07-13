@@ -1,11 +1,10 @@
-*********
 CHANGELOG
-*********
+=========
 
 PyPI pythonic-fp.iterables project.
 
 Semantic Versioning
-===================
+-------------------
 
 Strict 3 digit semantic versioning adopted 2025-05-19.
 
@@ -13,18 +12,20 @@ Strict 3 digit semantic versioning adopted 2025-05-19.
 - **MINOR** version incremented for backward compatible added functionality
 - **PATCH** version incremented for backward compatible bug fixes
 
+See `Semantic Versioning 2.0.0 <https://semver.org>`_.
+
 Releases and Important Milestones
-=================================
+---------------------------------
 
 3.0.0 - TBD
------------
+~~~~~~~~~~~
 
 First PyPI release as ``pythonic-fp.iterables``
 
 - dropping dtools namespace name because there is a repo by that name.
 
 2.0.0 - 2025-05-22
-------------------
+~~~~~~~~~~~~~~~~~~
 
 - Moved dtools.fp.iterables to its own PyPI project
 
@@ -39,7 +40,7 @@ First PyPI release as ``pythonic-fp.iterables``
     - will import dtools.fp.lazy directly for this functionality
 
 1.7.0 - 2025-04-22
-------------------
+~~~~~~~~~~~~~~~~~~
 
 Last PyPI release as dtools.fp
 
@@ -49,12 +50,12 @@ Last PyPI release as dtools.fp
 - pyproject.toml standardization
 
 1.6.0 - 2025-04-07
-------------------
+~~~~~~~~~~~~~~~~~~
 
 - typing improvements
 
 1.4.0 - 2025-03-16
-------------------
+~~~~~~~~~~~~~~~~~~
 
 - much work dtools.iterables
 
@@ -62,7 +63,7 @@ Last PyPI release as dtools.fp
   - tweaked API across iterables module
 
 1.3.0 - 2025-01-17
-------------------
+~~~~~~~~~~~~~~~~~~
 
 First release as dtools.fp
 
@@ -72,7 +73,7 @@ Repo name changes.
 - PyPI: grscheller.fp -> dtools.fp
 
 1.0.1 - 2024-10-20
-------------------
+~~~~~~~~~~~~~~~~~~
 
 - removed docs from repo
 - docs for all grscheller namespace projects maintained here
@@ -80,7 +81,7 @@ Repo name changes.
   - https://grscheller.github.io/grscheller-pypi-namespace-docs/
 
 1.0.0 - 2024-10-18
-------------------
+~~~~~~~~~~~~~~~~~~
 
 Decided to make this release first stable release.
 
@@ -88,12 +89,12 @@ Decided to make this release first stable release.
 - pytest improvements based on pytest documentation
 
 0.4.0 - 2024-10-03
-------------------
+~~~~~~~~~~~~~~~~~~
 
 Long overdue PyPI release.
 
 0.3.4.0 - 2024-09-30
---------------------
+~~~~~~~~~~~~~~~~~~~~
 
 Development environment only.
 
@@ -107,7 +108,7 @@ Development environment only.
   - all now return class woException.MB
 
 0.3.3.7 - 2024-09-22
---------------------
+~~~~~~~~~~~~~~~~~~~~
 
 Development environment only.
 
@@ -119,7 +120,7 @@ Development environment only.
   - dropWhile(it: Iterable[D], pred: Callable\[[D], bool\]) -> Iterator[D]
 
 0.3.3.4 - 2024-09-16
---------------------
+~~~~~~~~~~~~~~~~~~~~
 
 Development environment only.
 
@@ -129,7 +130,7 @@ Development environment only.
   - similar signatures
 
 0.3.3.3 - 2024-09-15
---------------------
+~~~~~~~~~~~~~~~~~~~~
 
 Development environment only.
 
@@ -140,7 +141,7 @@ Development environment only.
   - docstring not updated
 
 0.3.3.2 - 2024-09-14
---------------------
+~~~~~~~~~~~~~~~~~~~~
 
 Development environment only.
 
@@ -149,7 +150,7 @@ Development environment only.
   - shortcut version of foldL
 
 0.3.1 - 2024-08-20
-------------------
+~~~~~~~~~~~~~~~~~~
 
 Now fp.iterables no longer exports ``CONCAT``, ``MERGE``, ``EXHAUST``.
 
@@ -159,7 +160,7 @@ Now fp.iterables no longer exports ``CONCAT``, ``MERGE``, ``EXHAUST``.
   - grscheller.datastructures.split_ends
 
 0.2.0 - 2024-07-26
-------------------
+~~~~~~~~~~~~~~~~~~
 
 - from last PyPI release
 
@@ -168,7 +169,7 @@ Now fp.iterables no longer exports ``CONCAT``, ``MERGE``, ``EXHAUST``.
 - overall much better docstrings
 
 0.1.0 - 2024-07-11
-------------------
+~~~~~~~~~~~~~~~~~~
 
 Initial PyPI release as grscheller.fp
 
