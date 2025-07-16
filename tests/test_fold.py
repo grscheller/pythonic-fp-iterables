@@ -13,7 +13,7 @@
 # limitations under the License.
 
 from pythonic_fp.containers.maybe import MayBe as MB
-from pythonic_fp.iterables import reduce_left, foldl, mb_fold_left
+from pythonic_fp.iterables import reduce_left, fold_left, maybe_fold_left
 from pythonic_fp.iterables import sc_reduce_left, sc_reduce_right
 from pythonic_fp.fptools.function import swap, partial
 
@@ -38,28 +38,28 @@ class Test_fp_folds:
         data4 = (42,)
 
         assert reduce_left(data1, add) == 5050
-        assert foldl(data1, add, 10) == 5060
+        assert fold_left(data1, add, 10) == 5060
 
         assert reduce_left(data2, add) == 5049
-        assert foldl(data2, add, 10) == 5059
+        assert fold_left(data2, add, 10) == 5059
 
-        assert foldl(data3, add, 0) == 0
-        assert foldl(data3, add, 10) == 10
+        assert fold_left(data3, add, 0) == 0
+        assert fold_left(data3, add, 10) == 10
 
         assert reduce_left(data4, add) == 42
-        assert foldl(data4, add, 10) == 52
+        assert fold_left(data4, add, 10) == 52
 
         data1 = (1, 2, 3, 4, 5)
         data2 = (2, 3, 4, 5)
         data5: list[int] = []
 
         assert reduce_left(data1, add) == 15
-        assert foldl(data1, add, 10) == 25
+        assert fold_left(data1, add, 10) == 25
         assert reduce_left(data2, add) == 14
         assert reduce_left(data4, add) == 42
         assert reduce_left(data4, add) == 42
-        assert foldl(data5, add, 0) == 0
-        assert foldl(data5, add, -42) == -42
+        assert fold_left(data5, add, 0) == 0
+        assert fold_left(data5, add, -42) == -42
 
     def test_fold_noncomuinitive(self) -> None:
         def funcL(acc: int, jj: int) -> int:
@@ -75,8 +75,8 @@ class Test_fp_folds:
 
         assert reduce_left(data1, funcL) == -156
         assert reduce_left(data2, funcL) == 84
-        assert foldl(data3, funcL, 0) == 0
-        assert foldl(data3, funcL, -1) == -1
+        assert fold_left(data3, funcL, 0) == 0
+        assert fold_left(data3, funcL, -1) == -1
         assert reduce_left(data4, funcL) == 42
         assert reduce_left(data1, funcL) == -156
         assert reduce_left(data2, funcL) == 84
@@ -96,39 +96,39 @@ class Test_fp_mbFolds:
         data3: tuple[int, ...] = ()
         data4 = (42,)
 
-        assert mb_fold_left(data1, add) == MB(5050)
-        assert mb_fold_left(data1, add, 10) == MB(5060)
+        assert maybe_fold_left(data1, add) == MB(5050)
+        assert maybe_fold_left(data1, add, 10) == MB(5060)
 
-        assert mb_fold_left(data2, add) == MB(5049)
-        assert mb_fold_left(data2, add, 10) == MB(5059)
+        assert maybe_fold_left(data2, add) == MB(5049)
+        assert maybe_fold_left(data2, add, 10) == MB(5059)
 
-        assert mb_fold_left(data3, add) == MB()
-        assert mb_fold_left(data3, add, 10) == MB(10)
+        assert maybe_fold_left(data3, add) == MB()
+        assert maybe_fold_left(data3, add, 10) == MB(10)
 
-        assert mb_fold_left(data4, add) == MB(42)
-        assert mb_fold_left(data4, add, 10) == MB(52)
+        assert maybe_fold_left(data4, add) == MB(42)
+        assert maybe_fold_left(data4, add, 10) == MB(52)
 
         data5 = [1, 2, 3, 4, 5]
         data6 = [2, 3, 4, 5]
         data7: list[int] = []
         data8 = [42]
 
-        assert mb_fold_left(data5, add) == MB(15)
-        assert mb_fold_left(data5, add, 10) == MB(25)
-        assert mb_fold_left(data6, add) == MB(14)
-        assert mb_fold_left(data7, add) == MB()
-        assert mb_fold_left(data8, add) == MB(42)
-        assert mb_fold_left(data8, add).get(-1) == 42
-        assert mb_fold_left(data7, add).get(-1) == -1
+        assert maybe_fold_left(data5, add) == MB(15)
+        assert maybe_fold_left(data5, add, 10) == MB(25)
+        assert maybe_fold_left(data6, add) == MB(14)
+        assert maybe_fold_left(data7, add) == MB()
+        assert maybe_fold_left(data8, add) == MB(42)
+        assert maybe_fold_left(data8, add).get(-1) == 42
+        assert maybe_fold_left(data7, add).get(-1) == -1
 
-        assert mb_fold_left(data5, funcL) == MB(-156)
-        assert mb_fold_left(data6, funcL) == MB(84)
-        assert mb_fold_left(data7, funcL) == MB()
-        assert mb_fold_left(data7, funcL).get(-1) == -1
-        assert mb_fold_left(data8, funcL) == MB(42)
-        assert mb_fold_left(data5, funcL) == MB(-156)
-        assert mb_fold_left(data6, funcL) == MB(84)
-        assert mb_fold_left(data6, funcL).get() == 84
+        assert maybe_fold_left(data5, funcL) == MB(-156)
+        assert maybe_fold_left(data6, funcL) == MB(84)
+        assert maybe_fold_left(data7, funcL) == MB()
+        assert maybe_fold_left(data7, funcL).get(-1) == -1
+        assert maybe_fold_left(data8, funcL) == MB(42)
+        assert maybe_fold_left(data5, funcL) == MB(-156)
+        assert maybe_fold_left(data6, funcL) == MB(84)
+        assert maybe_fold_left(data6, funcL).get() == 84
 
 
 class Test_fp_sc_reduce_left:

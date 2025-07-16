@@ -17,8 +17,19 @@ See `Semantic Versioning 2.0.0 <https://semver.org>`_.
 Releases and Important Milestones
 ---------------------------------
 
-3.0.0 - TBD
+4.0.0 - TBD
 ~~~~~~~~~~~
+
+Primary purpose was to bring Sphinx documentation in alignment
+with other pythonic-fp projects. Ended up making substantial
+Sphinx documentation improvements.
+
+- API change
+
+  - renamed pythonic_fp.iterables.foldl to pythonic_fp.iterables.fold_left
+
+3.0.0 - 2025-07-06
+~~~~~~~~~~~~~~~~~~
 
 First PyPI release as ``pythonic-fp.iterables``
 
