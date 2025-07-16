@@ -14,17 +14,21 @@ This library assumes that at all times iterator protocol
 is followed. This means that all iterators are iterable and
 that ``iter(some_iterator) is some_iterator``.
 
+---
+
 #### Note:
 
 Iterables are not necessarily iterators.
 
-This PyPI project is part of of the grscheller
+---
+
+This PyPI project is part of of the
 [pythonic-fp namespace projects](https://github.com/grscheller/pythonic-fp/blob/main/README.md).
 
 ## Documentation
 
 Documentation for this PyPI projects is hosted on
-[GitHub Pages](https://grscheller.github.io/pythonic-fp/iterators/API/development/build/html/releases.html).
+[GitHub Pages](https://grscheller.github.io/pythonic-fp/iterables/API/development/build/html/releases.html).
 
 ## Copyright and License
 
