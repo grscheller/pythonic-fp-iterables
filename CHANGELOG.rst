@@ -17,12 +17,13 @@ See `Semantic Versioning 2.0.0 <https://semver.org>`_.
 Releases and Important Milestones
 ---------------------------------
 
-4.0.0 - TBD
-~~~~~~~~~~~
+4.0.0 - 2025-07-16
+~~~~~~~~~~~~~~~~~~
 
 Primary purpose was to bring Sphinx documentation in alignment
 with other pythonic-fp projects. Ended up making substantial
-Sphinx documentation improvements.
+Sphinx documentation improvements. Will use this documentation
+for the other pythonic-fp projects.
 
 - API change
 

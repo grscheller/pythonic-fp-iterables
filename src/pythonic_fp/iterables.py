@@ -66,13 +66,11 @@ __all__ = [
 
 
 class FM(Enum):
-    """
-    Iterable Blending Enums
-    ~~~~~~~~~~~~~~~~~~~~~~~
+    """Iterable Blending Enums.
 
-    - *CONCAT:* Concatenate first to last
-    - *MERGE:* Merge until one is exhausted
-    - *EXHAUST:* Merge until all are exhausted
+    - *CONCAT:* Concatenate iterables first to last
+    - *MERGE:* Merge iterables until one is exhausted
+    - *EXHAUST:* Merge iterables until all are exhausted
 
     """
     CONCAT = auto()
@@ -81,11 +79,11 @@ class FM(Enum):
 
 
 def concat[D](*iterables: Iterable[D]) -> Iterator[D]:
-    """
-    Sequentially concatenate multiple iterables together
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    """Sequentially concatenate multiple iterables together.
 
-    Type: ``concat[D](Iterable[D]) -> Iterator[D]``
+    .. code:: python
+
+        def concat[D](iterable: Iterable[D]) -> Iterator[D]
 
     - pure Python version of standard library's ``itertools.chain``
     - iterator sequentially yields each iterable until all are exhausted
@@ -93,9 +91,7 @@ def concat[D](*iterables: Iterable[D]) -> Iterator[D]:
     - performant to ``itertools.chain``
 
     :param iterables: iterables to concatenate
-    :type iterables: ``Iterable[D]``
     :return: concatenated iterators
-    :rtype: ``Iterator[D]``
 
     """
     for iterator in map(lambda x: iter(x), iterables):
@@ -108,21 +104,19 @@ def concat[D](*iterables: Iterable[D]) -> Iterator[D]:
 
 
 def merge[D](*iterables: Iterable[D], yield_partials: bool = False) -> Iterator[D]:
-    """
-    Shuffle together ``iterables`` until one is exhausted
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    """Shuffle together ``iterables`` until one is exhausted.
 
-    Type: ``merge[D](Iterable[D], bool) -> Iterator[D]``
+    .. code:: python
+
+        def merge[D](iterable: Iterable[D], yield_partials: bool) -> Iterator[D]
 
     If ``yield_partials`` is true
 
     - yield any unmatched yielded values from other iterables
     - prevents data lose if any of the iterables are iterators with external references
 
-    :param iterables: iterables to concatenate
-    :type iterables: ``Iterable[D]``
-    :return: merged iterators until one gets exhausted
-    :rtype: ``Iterator[D]``
+    :param iterables: iterables to merge until one gets exhausted
+    :return: merged iterators
 
     """
     iter_list = list(map(lambda x: iter(x), iterables))
@@ -141,16 +135,14 @@ def merge[D](*iterables: Iterable[D], yield_partials: bool = False) -> Iterator[
 
 
 def exhaust[D](*iterables: Iterable[D]) -> Iterator[D]:
-    """
-    Shuffle together multiple iterables until all are exhausted
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    """Shuffle together multiple iterables until all are exhausted.
 
-    Type: ``exhaust[D](Iterable[D]) -> Iterator[D]``
+    .. code:: python
 
-    :param iterables: iterables to concatenate
-    :type iterables: ``Iterable[D]``
-    :return: merged iterators until all exhausted
-    :rtype: ``Iterator[D]``
+        def exhaust[D](iterable: Iterable[D]) -> Iterator[D]
+
+    :param iterables: iterables to exhaustively merge
+    :return: merged iterators
 
     """
     iter_list = list(map(lambda x: iter(x), iterables))
@@ -178,17 +170,18 @@ def exhaust[D](*iterables: Iterable[D]) -> Iterator[D]:
 
 
 def drop[D](iterable: Iterable[D], n: int) -> Iterator[D]:
-    """
-    Drop the next n values from iterable
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    """Drop the next n values from iterable.
 
-    Type: ``drop[D](Iterable[D], int) -> Iterator[D]``
+    .. code:: python
+
+        def drop[D](
+            iterable: Iterable[D],
+            n: int
+        ) -> Iterator[D]
 
     :param iterable: iterable whose values are to be dropped
-    :type iterable: Iterable[D]
     :param n: number of values to be dropped
     :return: an iterator of the remaining values
-    :rtype: Iterator[D]
 
     """
     it = iter(iterable)
@@ -201,18 +194,18 @@ def drop[D](iterable: Iterable[D], n: int) -> Iterator[D]:
 
 
 def drop_while[D](iterable: Iterable[D], pred: Callable[[D], bool]) -> Iterator[D]:
-    """
-    Drop initial values from iterable while predicate is true
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    """Drop initial values from iterable while predicate is true.
 
-    Type: ``drop_while[D](Iterable[D], Callable[[D], bool], bool) -> Iterator[D]``
+    .. code:: python
+
+        def drop_while[D](
+            iterable: Iterable[D],
+            pred: Callable[[D], bool]
+        ) -> Iterator[D]
 
     :param iterable: iterable whose values are to be dropped
-    :type iterable: Iterable[D]
     :param pred: Boolean valued function
-    :type pred: Callable[[D], bool]
     :return: an iterator beginning where pred returned false
-    :rtype: Iterator[D]
 
     """
     it = iter(iterable)
@@ -228,17 +221,18 @@ def drop_while[D](iterable: Iterable[D], pred: Callable[[D], bool]) -> Iterator[
 
 
 def take[D](iterable: Iterable[D], n: int) -> Iterator[D]:
-    """
-    Return an iterator of up to n initial values of an iterable
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    """Return an iterator of up to n initial values of an iterable.
 
-    Type: ``take[D](Iterable[D], int) -> Iterator[D]``
+    .. code:: python
+
+        def take[D](
+            iterable: Iterable[D],
+            n: int
+        ) -> Iterator[D]
 
     :param iterable: iterable providing the values to be taken
-    :type iterable: Iterable[D]
     :param n: number of values to be dropped
     :return: an iterator of up to n initial values from iterable
-    :rtype: Iterator[D]
 
     """
     it = iter(iterable)
@@ -251,21 +245,21 @@ def take[D](iterable: Iterable[D], n: int) -> Iterator[D]:
 
 
 def take_while[D](iterable: Iterable[D], pred: Callable[[D], bool]) -> Iterator[D]:
-    """
-    Yield values from iterable while predicate is true
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    """Yield values from iterable while predicate is true.
 
-    Type: ``take_while[D](Iterable[D], Callable[[D], bool]) -> Iterator[D]``
+    .. code:: python
+
+        def take_while[D](
+            iterable: Iterable[D],
+            pred: Callable[[D], bool]
+        ) -> Iterator[D]
 
     .. warning::
         Risk of value loss if iterable is multiple referenced iterator.
 
     :param iterable: iterable providing the values to be taken
-    :type iterable: Iterable[D]
     :param pred: Boolean valued function
-    :type pred: Callable[[D], bool]
     :return: an Iterator of up to n initial values from the iterable
-    :rtype: Iterator[D]
 
     """
     it = iter(iterable)
@@ -281,11 +275,14 @@ def take_while[D](iterable: Iterable[D], pred: Callable[[D], bool]) -> Iterator[
 
 
 def take_split[D](iterable: Iterable[D], n: int) -> tuple[Iterator[D], Iterator[D]]:
-    """
-    Same as take except also return iterator of remaining values
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    """Same as take except also return iterator of remaining values.
 
-    Type: ``take[D](Iterable[D], int) -> Tuple[Iterator[D], Iterator[D]``
+    .. code:: python
+
+        def take_split[D](
+            iterable: Iterable[D],
+            n: int
+        ) -> tuple[Iterator[D], Iterator[D]]
 
     .. Warning::
 
@@ -293,10 +290,8 @@ def take_split[D](iterable: Iterable[D], n: int) -> tuple[Iterator[D], Iterator[
        first one is exhausted.
 
     :param iterable: iterable providing the values to be taken
-    :type iterable: Iterable[D]
     :param n: maximum number of values to be taken
     :return: an iterator of values taken and an iterator of remaining values
-    :rtype: Tuple[Iterator[D], Iterator[D]]
 
     """
     it = iter(iterable)
@@ -308,26 +303,25 @@ def take_split[D](iterable: Iterable[D], n: int) -> tuple[Iterator[D], Iterator[
 def take_while_split[D](
     iterable: Iterable[D], pred: Callable[[D], bool]
 ) -> tuple[Iterator[D], Iterator[D]]:
-    """
-    Yield values from iterable while predicate is true
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    """Yield values from iterable while predicate is true.
 
-    Type: ``take_while_split[D](Iterable[D], Callable[[D], bool]) -> Tuple[Iterator[D], Iterator]``
+    .. code:: python
+
+        def take_while_split[D](
+            iterable: Iterable[D],
+            pred: Callable[[D], bool]
+        ) -> tuple[Iterator[D], Iterator[D]]
 
     .. Warning::
 
-       **CONTRACT:** Do not access the second returned iterator until the
-       first one is exhausted.
+       **CONTRACT:** Do not access the second returned iterator until
+       the first one is exhausted.
 
     :param iterable: iterable providing the values to be taken
-    :type iterable: Iterable[D]
     :param pred: Boolean valued function
-    :type pred: Callable[[D], bool]
     :return: an iterator of values taken and an iterator of remaining values
-    :rtype: Tuple[Iterator[D], Iterator[D]]
 
     """
-
     def _take_while(
         it: Iterator[D], pred: Callable[[D], bool], val: Box[D]
     ) -> Iterator[D]:
@@ -356,25 +350,25 @@ def accumulate[D, L](
         f: Callable[[L, D], L],
         initial: L | NoValue = NoValue()
     ) -> Iterator[L]:
-    """
-    Returns an iterator of partial fold values
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    """Returns an iterator of partial fold values.
 
-    Type: ``accumulate[D, L](Iterable[D], Callable[[L, D], L], L) -> Iterator[L]``
+    .. code:: python
+
+        def accumulate[D, L](
+            iterable: Iterable[D],
+            f: Callable[[L, D], L],
+            initial: L
+        ) -> Iterator[L]
 
     A pure Python version of standard library's ``itertools.accumulate``
 
     - function ``f`` does not default to addition (for typing flexibility)
-    - begins accumulation with an optional ``initial`` value
+    - begins accumulation with an "optional" ``initial`` value
 
     :param iterable: iterable to be folded
-    :type iterable: Iterable[D]
     :param f: 2 parameter function, first parameter for accumulated value
-    :type f: Callable[[L, D], L]
     :param initial: "optional" initial value to start fold
-    :type initial: L
     :return: an iterator of the intermediate fold values
-    :rtype: Iterator[L]
 
     """
     it = iter(iterable)
@@ -402,11 +396,14 @@ def accumulate[D, L](
 
 
 def reduce_left[D](iterable: Iterable[D], f: Callable[[D, D], D]) -> D | Never:
-    """
-    Fold an iterable left with a function
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    """Fold an iterable left with a function.
 
-    Type: ``reduce_left[D](Iterable[D], Callable[[D, D], D], D) -> D | Never``
+    .. code:: python
+
+        def reduce_left[D](
+            iterable: Iterable[D],
+            f: Callable[[D, D], D]
+        ) -> D | Never
 
     .. Warning::
 
@@ -414,16 +411,13 @@ def reduce_left[D](iterable: Iterable[D], f: Callable[[D, D], D]) -> D | Never:
 
     .. Warning::
 
-       Except for *StopIteration*, this function does not catch any
-       exceptions ``f`` may raise.
+       This function does not catch or re-raises exceptions from ``f``.
 
     :param iterable: iterable to be reduced (folded)
-    :type iterable: Iterable[D]
     :param f: 2 parameter function, first parameter for accumulated value
-    :type f: Callable[[L, D], L]
     :return: reduced value from the iterable
-    :rtype: D | Never
     :raises StopIteration: when called on an empty circular array
+    :raises Exception: does not catch or re-raises exceptions from ``f``.
 
     """
     it = iter(iterable)
@@ -444,11 +438,15 @@ def fold_left[D, L](
         f: Callable[[L, D], L],
         initial: L
     ) -> L | Never:
-    """
-    Fold an iterable left with a function and initial value
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    """Fold an iterable left with a function and initial value.
 
-    Type: ``fold_left[D, L](Iterable[D], Callable[[L, D], L], L) -> L | Never``
+    .. code:: python
+
+        def fold_left[D, L](
+            iterable: Iterable[D],
+            f: Callable[[L, D], L],
+            initial: L
+        ) -> L | Never
 
     - not restricted to ``__add__`` for the folding function
     - initial value required, does not default to ``0`` for initial value
@@ -463,13 +461,9 @@ def fold_left[D, L](
        This function does not catch any exceptions ``f`` may raise.
 
     :param iterable: iterable to be folded
-    :type iterable: Iterable[D]
     :param f: 2 parameter function, first parameter for accumulated value
-    :type f: Callable[[L, D], L]
     :param initial: mandatory initial value to start fold
-    :type initial: L
     :return: the folded value
-    :rtype: L | Never
 
     """
     acc = initial
@@ -483,11 +477,15 @@ def maybe_fold_left[D, L](
         f: Callable[[L, D], L],
         initial: L | NoValue = NoValue()
     ) -> MayBe[L] | Never:
-    """
-    Folds an iterable left with "optional" initial value
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    """Folds an iterable left with an "optional" initial value..
 
-    Type: ``maybe_fold_left[D, L](Iterable[D], Callable[[L, D], L], L) -> MayBe[L] | Never``
+    .. code:: python
+
+        def maybe_fold_left[D, L](
+            iterable: Iterable[D],
+            f: Callable[[L, D], L],
+            initial: L
+        ) -> MayBe[L] | Never
 
     - traditional FP type order given for function ``f``
     - when an initial value is not given then ``L = D``
@@ -501,14 +499,10 @@ def maybe_fold_left[D, L](
 
        This function does not catch any exceptions ``f`` may raise.
 
-    :param iterable: iterable to be folded
-    :type iterable: Iterable[D]
-    :param f: 2 parameter function, first parameter for accumulated value
-    :type f: Callable[[L, D], L]
-    :param initial: mandatory initial value to start fold
-    :type initial: L
-    :return: MayBe of the folded value
-    :rtype: MayBe[L]
+    :param iterable: The iterable to be folded.
+    :param f: First argument is for the accumulated value.
+    :param initial: Mandatory initial value to start fold.
+    :return: Folded value if it exists.
 
     """
     acc: L
@@ -538,22 +532,18 @@ def sc_reduce_left[D](
         include_start: bool = True,
         include_stop: bool = True,
     ) -> tuple[MayBe[D], Iterator[D]]:
-    """
-    Short circuit version of a left reduce
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    Type:
+    """Short circuit version of a left reduce.
 
     .. code:: python
 
-       sc_reduce_left[D](
-               Iterable[D],
-               Callable[[D, D], D],
-               Callable[[D], bool],
-               Callable[[D], bool],
-               bool,
-               bool
-            ) -> Tuple[MayBe[D] | Iterator[D]]
+        def sc_reduce_left[D](
+            iterable: Iterable[D],
+            f: Callable[[D, D], D],
+            start: Callable[[D], bool],
+            stop: Callable[[D], bool],
+            include_start: bool,
+            include_stop: bool
+        ) -> tuple[MayBe[D], Iterator[D]]
 
     Useful for infinite iterables.
 
@@ -564,17 +554,12 @@ def sc_reduce_left[D](
     - continue folding until end (of a possibly infinite iterable)
 
     :param iterable: iterable to be reduced from the left
-    :type iterable: Iterable[D]
     :param f: 2 parameter function, first parameter for accumulated value
-    :type f: Callable[[D, D], D]
     :param start: delay starting the fold until it returns true
-    :type start: Callable[[D], bool]
     :param stop: prematurely stop the fold when it returns true
-    :type stop: Callable[[D], bool]
     :param include_start: if true, include fold starting value in fold
     :param include_stop: if true, include stopping value in fold
     :return: MayBe of the folded value and remaining iterables
-    :rtype: Tuple[MayBe[D], Iterator[D]]
 
     """
     it_start = drop_while(iterable, negate(start))
@@ -610,22 +595,18 @@ def sc_reduce_right[D](
         include_start: bool = True,
         include_stop: bool = True,
     ) -> tuple[MayBe[D], Iterator[D]]:
-    """
-    Short circuit version of a right reduce
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    Type:
+    """Short circuit version of a right reduce.
 
     .. code:: python
 
-       sc_reduce_left[D](
-           Iterable[D],
-           Callable[[D, D], D],
-           Callable[[D], bool],
-           Callable[[D], bool],
-           bool,
-           bool
-       ) -> Tuple[MayBe[D] | Iterator[D]
+        def sc_reduce_left[D](
+            iterable: Iterable[D],
+            f: Callable[[D, D], D],
+            start: Callable[[D], bool],
+            stop: Callable[[D], bool],
+            include_start: bool,
+            include_stop: bool
+        ) -> Tuple[MayBe[D] | Iterator[D]
 
     Useful for infinite and non-reversible iterables.
 
@@ -636,17 +617,12 @@ def sc_reduce_right[D](
     - continue reducing right until beginning
 
     :param iterable: iterable to be reduced from the right
-    :type iterable: Iterable[D]
     :param f: 2 parameter function, second parameter for accumulated value
-    :type f: Callable[[D, D], D]
     :param start: delay starting the fold until it returns true
-    :type start: Callable[[D], bool]
     :param stop: prematurely stop the fold when it returns true
-    :type stop: Callable[[D], bool]
     :param include_start: if true, include fold starting value in fold
     :param include_stop: if true, include stopping value in fold
     :return: MayBe of the folded value and remaining iterables
-    :rtype: Tuple[MayBe[D], Iterator[D]]
 
     """
     it_start, it_rest = take_while_split(iterable, negate(start))

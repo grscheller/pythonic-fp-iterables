@@ -2,25 +2,29 @@
 
 PyPI project
 [pythonic-fp.iterators](https://pypi.org/project/pythonic-fp.iterables/)
-implementing a Python package of tools for iterables and iterators.
+implementing a Python library of functions for iterables and iterators.
 
 - Concatenating and merging iterables
 - Dropping and taking values from iterables
 - Reducing and accumulating iterables
-- Assumptions
-  - iterables are not necessarily iterators
-  - at all times iterator protocol is assumed to be followed
-    - all iterators are assumed to be iterable
-    - for all iterators `my_iter` we assume `iter(my_iter) is my_iter`
+
+#### Info:
+
+This library assumes that at all times iterator protocol
+is followed. This means that all iterators are iterable and
+that ``iter(some_iterator) is some_iterator``.
+
+#### Note:
+
+Iterables are not necessarily iterators.
 
 This PyPI project is part of of the grscheller
 [pythonic-fp namespace projects](https://github.com/grscheller/pythonic-fp/blob/main/README.md).
 
 ## Documentation
 
-Documentation for package
-[GitHub Pages](https://grscheller.github.io/pythonic-fp/iterables/API/development/build/html)
-hosted on GitHub pages.
+Documentation for this PyPI projects is hosted on
+[GitHub Pages](https://grscheller.github.io/pythonic-fp/iterators/API/development/build/html/releases.html).
 
 ## Copyright and License
 
