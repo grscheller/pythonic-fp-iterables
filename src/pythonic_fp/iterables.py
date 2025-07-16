@@ -44,7 +44,6 @@ from pythonic_fp.fptools.function import negate, swap
 from pythonic_fp.fptools.singletons import NoValue
 
 __all__ = [
-    'FM',
     'concat',
     'merge',
     'exhaust',
@@ -62,21 +61,8 @@ __all__ = [
     'sc_reduce_right',
 ]
 
+
 # Iterate over multiple iterables
-
-
-class FM(Enum):
-    """Iterable Blending Enums.
-
-    - *CONCAT:* Concatenate iterables first to last
-    - *MERGE:* Merge iterables until one is exhausted
-    - *EXHAUST:* Merge iterables until all are exhausted
-
-    """
-    CONCAT = auto()
-    MERGE = auto()
-    EXHAUST = auto()
-
 
 def concat[D](*iterables: Iterable[D]) -> Iterator[D]:
     """Sequentially concatenate multiple iterables together.
@@ -167,7 +153,6 @@ def exhaust[D](*iterables: Iterable[D]) -> Iterator[D]:
 
 
 ## dropping and taking
-
 
 def drop[D](iterable: Iterable[D], n: int) -> Iterator[D]:
     """Drop the next n values from iterable.
@@ -343,7 +328,6 @@ def take_while_split[D](
 
 
 ## reducing and accumulating
-
 
 def accumulate[D, L](
         iterable: Iterable[D],
