@@ -12,9 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""
-Library of functions for iterating iterables.
----------------------------------------------
+"""Library of functions for iterating iterables.
 
 - Concatenating and merging iterables
 - Dropping and taking values from iterables
@@ -36,7 +34,6 @@ __copyright__ = 'Copyright (c) 2023-2025 Geoffrey R. Scheller'
 __license__ = 'Apache License 2.0'
 
 from collections.abc import Callable, Iterable, Iterator
-from enum import auto, Enum
 from typing import cast, Never
 from pythonic_fp.containers.box import Box
 from pythonic_fp.containers.maybe import MayBe
