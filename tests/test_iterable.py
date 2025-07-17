@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from pythonic_fp.iterables import concat, merge, exhaust
+from pythonic_fp.iterables import blend, concat, exhaust, merge, MergeEnum
 from pythonic_fp.iterables import accumulate
 from pythonic_fp.iterables import drop, drop_while
 from pythonic_fp.iterables import take, take_while
@@ -20,6 +20,21 @@ from pythonic_fp.iterables import take_split, take_while_split
 
 
 class Test_fp_iterables:
+    def test_merge_enum(self) -> None:
+        my_str = 'ab'
+        my_tuple = (10, 11, 12)
+        concat1 = blend(range(1,5), my_str, my_tuple)
+        concat2 = blend(range(1,5), my_str, my_tuple, merge_enum=MergeEnum.Concat)
+        merge1 = blend(range(1,5), my_str, my_tuple, merge_enum=MergeEnum.Merge)
+        merge2 = blend(range(1,5), my_str, my_tuple, merge_enum=MergeEnum.Merge, yield_partials=True)
+        exhaust = blend(range(1,5), my_str, my_tuple, merge_enum=MergeEnum.Exhaust)
+
+        assert tuple(concat1) == (1, 2, 3, 4, 'a', 'b', 10, 11, 12)
+        assert tuple(concat2) == (1, 2, 3, 4, 'a', 'b', 10, 11, 12)
+        assert tuple(merge1) == (1,'a', 10, 2, 'b', 11)
+        assert tuple(merge2) == (1,'a', 10, 2, 'b', 11, 3)
+        assert tuple(exhaust) == (1,'a', 10, 2, 'b', 11, 3, 12, 4)
+
     def test_taking_dropping(self) -> None:
         foo = tuple(range(10))
         assert list(foo) == [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]

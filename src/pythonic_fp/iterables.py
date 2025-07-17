@@ -34,6 +34,7 @@ __copyright__ = 'Copyright (c) 2023-2025 Geoffrey R. Scheller'
 __license__ = 'Apache License 2.0'
 
 from collections.abc import Callable, Iterable, Iterator
+from enum import auto, Enum
 from typing import cast, Never
 from pythonic_fp.containers.box import Box
 from pythonic_fp.containers.maybe import MayBe
@@ -41,9 +42,11 @@ from pythonic_fp.fptools.function import negate, swap
 from pythonic_fp.fptools.singletons import NoValue
 
 __all__ = [
+    'MergeEnum',
     'concat',
     'merge',
     'exhaust',
+    'blend',
     'drop',
     'drop_while',
     'take',
@@ -57,7 +60,19 @@ __all__ = [
     'sc_reduce_left',
     'sc_reduce_right',
 ]
+class MergeEnum(Enum):
+    """
+    Iterable Blending Enums
+    ~~~~~~~~~~~~~~~~~~~~~~~
 
+    - *CONCAT:* Concatenate first to last
+    - *MERGE:* Merge until one is exhausted
+    - *EXHAUST:* Merge until all are exhausted
+
+    """
+    Concat = auto()
+    Merge = auto()
+    Exhaust = auto()
 
 # Iterate over multiple iterables
 
@@ -68,13 +83,16 @@ def concat[D](*iterables: Iterable[D]) -> Iterator[D]:
 
         def concat[D](iterable: Iterable[D]) -> Iterator[D]
 
-    - pure Python version of standard library's ``itertools.chain``
-    - iterator sequentially yields each iterable until all are exhausted
-    - an infinite iterable will prevent subsequent iterables from yielding any values
-    - performant to ``itertools.chain``
+    .. warning::
+        An infinite iterable will prevent subsequent iterables from
+        yielding any values.
+    
+    ,, note::
+
+        Performant to the standard library's ``itertools.chain``.
 
     :param iterables: iterables to concatenate
-    :return: concatenated iterators
+    :return: an iterator of the concatenated values
 
     """
     for iterator in map(lambda x: iter(x), iterables):
@@ -86,19 +104,27 @@ def concat[D](*iterables: Iterable[D]) -> Iterator[D]:
                 break
 
 
-def merge[D](*iterables: Iterable[D], yield_partials: bool = False) -> Iterator[D]:
-    """Shuffle together ``iterables`` until one is exhausted.
+def merge[D](
+        *iterables: Iterable[D],
+        yield_partials: bool = False
+    ) -> Iterator[D]:
+    """Merge together ``iterables`` until one is exhausted.
 
     .. code:: python
 
-        def merge[D](iterable: Iterable[D], yield_partials: bool) -> Iterator[D]
+        def merge[D](
+            iterable: Iterable[D],
+            yield_partials: bool = False
+        ) -> Iterator[D]
 
-    If ``yield_partials`` is true
+    .. note::
 
-    - yield any unmatched yielded values from other iterables
-    - prevents data lose if any of the iterables are iterators with external references
+        When ``yield_partials`` is true, then any unmatched values from other iterables
+        already yielded when the first iterable is exhausted are yielded. This prevents
+        data lose if any of the iterables are iterators with external references.
 
     :param iterables: iterables to merge until one gets exhausted
+    :param yield_partials: yield any unpaired yielded values from other iterables
     :return: merged iterators
 
     """
@@ -118,11 +144,11 @@ def merge[D](*iterables: Iterable[D], yield_partials: bool = False) -> Iterator[
 
 
 def exhaust[D](*iterables: Iterable[D]) -> Iterator[D]:
-    """Shuffle together multiple iterables until all are exhausted.
+    """Merge together multiple iterables until all are exhausted.
 
     .. code:: python
 
-        def exhaust[D](iterable: Iterable[D]) -> Iterator[D]
+        def exhaust[D](iterables: Iterable[D]) -> Iterator[D]
 
     :param iterables: iterables to exhaustively merge
     :return: merged iterators
@@ -148,8 +174,39 @@ def exhaust[D](*iterables: Iterable[D]) -> Iterator[D]:
 
         yield from values
 
+def blend[D](*iterables: Iterable[D],
+        merge_enum: MergeEnum = MergeEnum.Concat,
+        yield_partials: bool = False
+    ) -> Iterator[D]:
+    """Base merge behavior on name only parameters.
+
+    .. code:: python
+
+        def blend[D](
+            iterable: Iterable[D]
+            merge_enum: MergeEnum = MergeEnum.Concat
+        ) -> Iterator[D]
+
+    :param iterables: iterables to blend together
+    :param merge_enum: MergeEnum to determine merging behavior
+    :param yield_partials: yield yielded unpaired values from other iterables
+    :return: an iterator of type D
+    :raises ValueError: when an unknown MergeEnum is given
+
+    """
+    match merge_enum:
+        case MergeEnum.Concat:
+            return concat(*iterables)
+        case MergeEnum.Merge:
+            return merge(*iterables, yield_partials = yield_partials)
+        case MergeEnum.Exhaust:
+            return exhaust(*iterables)
+
+    raise ValueError('Unknown MergeEnum given')
+
 
 ## dropping and taking
+
 
 def drop[D](iterable: Iterable[D], n: int) -> Iterator[D]:
     """Drop the next n values from iterable.
@@ -325,6 +382,7 @@ def take_while_split[D](
 
 
 ## reducing and accumulating
+
 
 def accumulate[D, L](
         iterable: Iterable[D],
