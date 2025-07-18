@@ -61,13 +61,11 @@ __all__ = [
     'sc_reduce_right',
 ]
 class MergeEnum(Enum):
-    """
-    Iterable Blending Enums
-    ~~~~~~~~~~~~~~~~~~~~~~~
+    """Iterable Blending Enums.
 
-    - *CONCAT:* Concatenate first to last
-    - *MERGE:* Merge until one is exhausted
-    - *EXHAUST:* Merge until all are exhausted
+    - *MergeEnum.Concat*: Concatenate first to last
+    - *MergeEnum.Merge*: Merge until one is exhausted
+    - *MergeEnum.Exhaust*: Merge until all are exhausted
 
     """
     Concat = auto()
