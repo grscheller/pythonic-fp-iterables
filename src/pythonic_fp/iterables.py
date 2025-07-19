@@ -12,7 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Library of functions for iterating iterables.
+"""Pythonic FP - Iterables
+
+Library of functions for iterating iterables.
 
 - Concatenating and merging iterables
 - Dropping and taking values from iterables
