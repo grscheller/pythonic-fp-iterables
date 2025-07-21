@@ -12,12 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from pythonic_fp.iterables import blend, concat, exhaust, merge, MergeEnum
-from pythonic_fp.iterables import accumulate
-from pythonic_fp.iterables import drop, drop_while
-from pythonic_fp.iterables import take, take_while
-from pythonic_fp.iterables import take_split, take_while_split
-
+from pythonic_fp.iterables.drop_take import drop, drop_while
+from pythonic_fp.iterables.drop_take import take, take_while
+from pythonic_fp.iterables.drop_take import take_split, take_while_split
+from pythonic_fp.iterables.folding import accumulate
+from pythonic_fp.iterables.merging import blend, concat, exhaust, merge, MergeEnum
 
 class Test_fp_iterables:
     def test_merge_enum(self) -> None:

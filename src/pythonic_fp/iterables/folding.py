@@ -12,22 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Pythonic FP - Iterables
-
-Library of functions for iterating iterables.
-
-- Concatenating and merging iterables
-- Dropping and taking values from iterables
-- Reducing and accumulating iterables
-- Assumptions
-
-  - iterables are not necessarily iterators
-  - at all times iterator protocol is assumed to be followed
-
-    - all iterators are assumed to be iterable
-    - for all iterators ``foo`` we assume ``iter(foo) is foo``
-
-"""
+"""Module pythonic_fp.iterables.folding"""
 
 from __future__ import annotations
 
@@ -36,25 +21,13 @@ __copyright__ = 'Copyright (c) 2023-2025 Geoffrey R. Scheller'
 __license__ = 'Apache License 2.0'
 
 from collections.abc import Callable, Iterable, Iterator
-from enum import auto, Enum
 from typing import cast, Never
-from pythonic_fp.containers.box import Box
 from pythonic_fp.containers.maybe import MayBe
 from pythonic_fp.fptools.function import negate, swap
 from pythonic_fp.fptools.singletons import NoValue
+from .drop_take import drop_while, take_while_split
 
 __all__ = [
-    'MergeEnum',
-    'concat',
-    'merge',
-    'exhaust',
-    'blend',
-    'drop',
-    'drop_while',
-    'take',
-    'take_while',
-    'take_split',
-    'take_while_split',
     'accumulate',
     'reduce_left',
     'fold_left',
@@ -62,327 +35,6 @@ __all__ = [
     'sc_reduce_left',
     'sc_reduce_right',
 ]
-class MergeEnum(Enum):
-    """Iterable Blending Enums.
-
-    - *MergeEnum.Concat*: Concatenate first to last
-    - *MergeEnum.Merge*: Merge until one is exhausted
-    - *MergeEnum.Exhaust*: Merge until all are exhausted
-
-    """
-    Concat = auto()
-    Merge = auto()
-    Exhaust = auto()
-
-# Iterate over multiple iterables
-
-def concat[D](*iterables: Iterable[D]) -> Iterator[D]:
-    """Sequentially concatenate multiple iterables together.
-
-    .. code:: python
-
-        def concat[D](iterable: Iterable[D]) -> Iterator[D]
-
-    .. warning::
-        An infinite iterable will prevent subsequent iterables from
-        yielding any values.
-    
-    ,, note::
-
-        Performant to the standard library's ``itertools.chain``.
-
-    :param iterables: iterables to concatenate
-    :return: an iterator of the concatenated values
-
-    """
-    for iterator in map(lambda x: iter(x), iterables):
-        while True:
-            try:
-                value = next(iterator)
-                yield value
-            except StopIteration:
-                break
-
-
-def merge[D](
-        *iterables: Iterable[D],
-        yield_partials: bool = False
-    ) -> Iterator[D]:
-    """Merge together ``iterables`` until one is exhausted.
-
-    .. code:: python
-
-        def merge[D](
-            iterable: Iterable[D],
-            yield_partials: bool = False
-        ) -> Iterator[D]
-
-    .. note::
-
-        When ``yield_partials`` is true, then any unmatched values from other iterables
-        already yielded when the first iterable is exhausted are yielded. This prevents
-        data lose if any of the iterables are iterators with external references.
-
-    :param iterables: iterables to merge until one gets exhausted
-    :param yield_partials: yield any unpaired yielded values from other iterables
-    :return: merged iterators
-
-    """
-    iter_list = list(map(lambda x: iter(x), iterables))
-    values = []
-    if (num_iters := len(iter_list)) > 0:
-        while True:
-            try:
-                for ii in range(num_iters):
-                    values.append(next(iter_list[ii]))
-                yield from values
-                values.clear()
-            except StopIteration:
-                break
-        if yield_partials:
-            yield from values
-
-
-def exhaust[D](*iterables: Iterable[D]) -> Iterator[D]:
-    """Merge together multiple iterables until all are exhausted.
-
-    .. code:: python
-
-        def exhaust[D](iterables: Iterable[D]) -> Iterator[D]
-
-    :param iterables: iterables to exhaustively merge
-    :return: merged iterators
-
-    """
-    iter_list = list(map(lambda x: iter(x), iterables))
-    if (num_iters := len(iter_list)) > 0:
-        ii = 0
-        values = []
-        while True:
-            try:
-                while ii < num_iters:
-                    values.append(next(iter_list[ii]))
-                    ii += 1
-                yield from values
-                ii = 0
-                values.clear()
-            except StopIteration:
-                num_iters -= 1
-                if num_iters < 1:
-                    break
-                del iter_list[ii]
-
-        yield from values
-
-def blend[D](*iterables: Iterable[D],
-        merge_enum: MergeEnum = MergeEnum.Concat,
-        yield_partials: bool = False
-    ) -> Iterator[D]:
-    """Base merge behavior on name only parameters.
-
-    .. code:: python
-
-        def blend[D](
-            iterable: Iterable[D]
-            merge_enum: MergeEnum = MergeEnum.Concat
-        ) -> Iterator[D]
-
-    :param iterables: iterables to blend together
-    :param merge_enum: MergeEnum to determine merging behavior
-    :param yield_partials: yield yielded unpaired values from other iterables
-    :return: an iterator of type D
-    :raises ValueError: when an unknown MergeEnum is given
-
-    """
-    match merge_enum:
-        case MergeEnum.Concat:
-            return concat(*iterables)
-        case MergeEnum.Merge:
-            return merge(*iterables, yield_partials = yield_partials)
-        case MergeEnum.Exhaust:
-            return exhaust(*iterables)
-
-    raise ValueError('Unknown MergeEnum given')
-
-
-## dropping and taking
-
-
-def drop[D](iterable: Iterable[D], n: int) -> Iterator[D]:
-    """Drop the next n values from iterable.
-
-    .. code:: python
-
-        def drop[D](
-            iterable: Iterable[D],
-            n: int
-        ) -> Iterator[D]
-
-    :param iterable: iterable whose values are to be dropped
-    :param n: number of values to be dropped
-    :return: an iterator of the remaining values
-
-    """
-    it = iter(iterable)
-    for _ in range(n):
-        try:
-            next(it)
-        except StopIteration:
-            break
-    return it
-
-
-def drop_while[D](iterable: Iterable[D], pred: Callable[[D], bool]) -> Iterator[D]:
-    """Drop initial values from iterable while predicate is true.
-
-    .. code:: python
-
-        def drop_while[D](
-            iterable: Iterable[D],
-            pred: Callable[[D], bool]
-        ) -> Iterator[D]
-
-    :param iterable: iterable whose values are to be dropped
-    :param pred: Boolean valued function
-    :return: an iterator beginning where pred returned false
-
-    """
-    it = iter(iterable)
-    while True:
-        try:
-            value = next(it)
-            if not pred(value):
-                it = concat((value,), it)
-                break
-        except StopIteration:
-            break
-    return it
-
-
-def take[D](iterable: Iterable[D], n: int) -> Iterator[D]:
-    """Return an iterator of up to n initial values of an iterable.
-
-    .. code:: python
-
-        def take[D](
-            iterable: Iterable[D],
-            n: int
-        ) -> Iterator[D]
-
-    :param iterable: iterable providing the values to be taken
-    :param n: number of values to be dropped
-    :return: an iterator of up to n initial values from iterable
-
-    """
-    it = iter(iterable)
-    for _ in range(n):
-        try:
-            value = next(it)
-            yield value
-        except StopIteration:
-            break
-
-
-def take_while[D](iterable: Iterable[D], pred: Callable[[D], bool]) -> Iterator[D]:
-    """Yield values from iterable while predicate is true.
-
-    .. code:: python
-
-        def take_while[D](
-            iterable: Iterable[D],
-            pred: Callable[[D], bool]
-        ) -> Iterator[D]
-
-    .. warning::
-        Risk of value loss if iterable is multiple referenced iterator.
-
-    :param iterable: iterable providing the values to be taken
-    :param pred: Boolean valued function
-    :return: an Iterator of up to n initial values from the iterable
-
-    """
-    it = iter(iterable)
-    while True:
-        try:
-            value = next(it)
-            if pred(value):
-                yield value
-            else:
-                break
-        except StopIteration:
-            break
-
-
-def take_split[D](iterable: Iterable[D], n: int) -> tuple[Iterator[D], Iterator[D]]:
-    """Same as take except also return iterator of remaining values.
-
-    .. code:: python
-
-        def take_split[D](
-            iterable: Iterable[D],
-            n: int
-        ) -> tuple[Iterator[D], Iterator[D]]
-
-    .. Warning::
-
-       **CONTRACT:** Do not access the second returned iterator until the
-       first one is exhausted.
-
-    :param iterable: iterable providing the values to be taken
-    :param n: maximum number of values to be taken
-    :return: an iterator of values taken and an iterator of remaining values
-
-    """
-    it = iter(iterable)
-    itn = take(it, n)
-
-    return itn, it
-
-
-def take_while_split[D](
-    iterable: Iterable[D], pred: Callable[[D], bool]
-) -> tuple[Iterator[D], Iterator[D]]:
-    """Yield values from iterable while predicate is true.
-
-    .. code:: python
-
-        def take_while_split[D](
-            iterable: Iterable[D],
-            pred: Callable[[D], bool]
-        ) -> tuple[Iterator[D], Iterator[D]]
-
-    .. Warning::
-
-       **CONTRACT:** Do not access the second returned iterator until
-       the first one is exhausted.
-
-    :param iterable: iterable providing the values to be taken
-    :param pred: Boolean valued function
-    :return: an iterator of values taken and an iterator of remaining values
-
-    """
-    def _take_while(
-        it: Iterator[D], pred: Callable[[D], bool], val: Box[D]
-    ) -> Iterator[D]:
-        while True:
-            try:
-                val.put(next(it))
-                if pred(val.get()):
-                    yield val.pop()
-                else:
-                    break
-            except StopIteration:
-                break
-
-    it = iter(iterable)
-    value: Box[D] = Box()
-    it_pred = _take_while(it, pred, value)
-
-    return (it_pred, concat(value, it))
-
-
-## reducing and accumulating
-
 
 def accumulate[D, L](
         iterable: Iterable[D],
@@ -434,7 +86,10 @@ def accumulate[D, L](
             yield acc
 
 
-def reduce_left[D](iterable: Iterable[D], f: Callable[[D, D], D]) -> D | Never:
+def reduce_left[D](
+        iterable: Iterable[D],
+        f: Callable[[D, D], D]
+    ) -> D | Never:
     """Fold an iterable left with a function.
 
     .. code:: python
@@ -455,7 +110,7 @@ def reduce_left[D](iterable: Iterable[D], f: Callable[[D, D], D]) -> D | Never:
     :param iterable: iterable to be reduced (folded)
     :param f: 2 parameter function, first parameter for accumulated value
     :return: reduced value from the iterable
-    :raises StopIteration: when called on an empty circular array
+    :raises StopIteration: when called on an empty iterable
     :raises Exception: does not catch or re-raises exceptions from ``f``.
 
     """

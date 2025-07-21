@@ -13,8 +13,8 @@
 # limitations under the License.
 
 from pythonic_fp.containers.maybe import MayBe as MB
-from pythonic_fp.iterables import reduce_left, fold_left, maybe_fold_left
-from pythonic_fp.iterables import sc_reduce_left, sc_reduce_right
+from pythonic_fp.iterables.folding import reduce_left, fold_left, maybe_fold_left
+from pythonic_fp.iterables.folding import sc_reduce_left, sc_reduce_right
 from pythonic_fp.fptools.function import swap, partial
 
 
