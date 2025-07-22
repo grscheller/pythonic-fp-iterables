@@ -23,9 +23,9 @@ This PyPI project is part of of the
 Documentation
 -------------
 
-Documentation for this PyPI projects is hosted on
+Documentation for this project is hosted on
 `GitHub Pages
-<https://grscheller.github.io/pythonic-fp/iterables/API/development/build/html/releases.html>`_
+<https://grscheller.github.io/pythonic-fp/iterables/API/development/build/html/releases.html>`_.
 
 Copyright and License
 ---------------------
