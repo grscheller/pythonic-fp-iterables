@@ -12,9 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from pythonic_fp.containers.maybe import MayBe as MB
 from pythonic_fp.iterables.folding import reduce_left, fold_left, maybe_fold_left
 from pythonic_fp.iterables.folding import sc_reduce_left, sc_reduce_right
+from pythonic_fp.fptools.maybe import MayBe as MayBe
 from pythonic_fp.fptools.function import swap, partial
 
 
@@ -96,38 +96,38 @@ class Test_fp_mbFolds:
         data3: tuple[int, ...] = ()
         data4 = (42,)
 
-        assert maybe_fold_left(data1, add) == MB(5050)
-        assert maybe_fold_left(data1, add, 10) == MB(5060)
+        assert maybe_fold_left(data1, add) == MayBe(5050)
+        assert maybe_fold_left(data1, add, 10) == MayBe(5060)
 
-        assert maybe_fold_left(data2, add) == MB(5049)
-        assert maybe_fold_left(data2, add, 10) == MB(5059)
+        assert maybe_fold_left(data2, add) == MayBe(5049)
+        assert maybe_fold_left(data2, add, 10) == MayBe(5059)
 
-        assert maybe_fold_left(data3, add) == MB()
-        assert maybe_fold_left(data3, add, 10) == MB(10)
+        assert maybe_fold_left(data3, add) == MayBe()
+        assert maybe_fold_left(data3, add, 10) == MayBe(10)
 
-        assert maybe_fold_left(data4, add) == MB(42)
-        assert maybe_fold_left(data4, add, 10) == MB(52)
+        assert maybe_fold_left(data4, add) == MayBe(42)
+        assert maybe_fold_left(data4, add, 10) == MayBe(52)
 
         data5 = [1, 2, 3, 4, 5]
         data6 = [2, 3, 4, 5]
         data7: list[int] = []
         data8 = [42]
 
-        assert maybe_fold_left(data5, add) == MB(15)
-        assert maybe_fold_left(data5, add, 10) == MB(25)
-        assert maybe_fold_left(data6, add) == MB(14)
-        assert maybe_fold_left(data7, add) == MB()
-        assert maybe_fold_left(data8, add) == MB(42)
+        assert maybe_fold_left(data5, add) == MayBe(15)
+        assert maybe_fold_left(data5, add, 10) == MayBe(25)
+        assert maybe_fold_left(data6, add) == MayBe(14)
+        assert maybe_fold_left(data7, add) == MayBe()
+        assert maybe_fold_left(data8, add) == MayBe(42)
         assert maybe_fold_left(data8, add).get(-1) == 42
         assert maybe_fold_left(data7, add).get(-1) == -1
 
-        assert maybe_fold_left(data5, funcL) == MB(-156)
-        assert maybe_fold_left(data6, funcL) == MB(84)
-        assert maybe_fold_left(data7, funcL) == MB()
+        assert maybe_fold_left(data5, funcL) == MayBe(-156)
+        assert maybe_fold_left(data6, funcL) == MayBe(84)
+        assert maybe_fold_left(data7, funcL) == MayBe()
         assert maybe_fold_left(data7, funcL).get(-1) == -1
-        assert maybe_fold_left(data8, funcL) == MB(42)
-        assert maybe_fold_left(data5, funcL) == MB(-156)
-        assert maybe_fold_left(data6, funcL) == MB(84)
+        assert maybe_fold_left(data8, funcL) == MayBe(42)
+        assert maybe_fold_left(data5, funcL) == MayBe(-156)
+        assert maybe_fold_left(data6, funcL) == MayBe(84)
         assert maybe_fold_left(data6, funcL).get() == 84
 
 
@@ -139,7 +139,7 @@ class Test_fp_sc_reduce_left:
         try:
             next(it)
         except StopIteration:
-            assert mb_sum55 == MB(55)
+            assert mb_sum55 == MayBe(55)
         else:
             assert False
 
@@ -155,7 +155,7 @@ class Test_fp_sc_reduce_left:
         except StopIteration:
             assert False
         else:
-            assert (int9, mb_sum35) == (9, MB(35))
+            assert (int9, mb_sum35) == (9, MayBe(35))
 
         mb_sum33, it = sc_reduce_left(data, add, start=ge2, stop=ge8, include_start=False)
         try:
@@ -163,7 +163,7 @@ class Test_fp_sc_reduce_left:
         except StopIteration:
             assert False
         else:
-            assert (int9, mb_sum33) == (9, MB(33))
+            assert (int9, mb_sum33) == (9, MayBe(33))
 
         mb_sum27, it = sc_reduce_left(data, add, start=ge2, stop=ge8, include_stop=False)
         try:
@@ -171,7 +171,7 @@ class Test_fp_sc_reduce_left:
         except StopIteration:
             assert False
         else:
-            assert (int8, MB(mb_sum27)) == (8, MB(MB(27)))
+            assert (int8, MayBe(mb_sum27)) == (8, MayBe(MayBe(27)))
 
         # ---------------------------------------------------------------
 
@@ -181,7 +181,7 @@ class Test_fp_sc_reduce_left:
         except StopIteration:
             assert False
         else:
-            assert (int9, mb_sum8) == (9, MB(8))
+            assert (int9, mb_sum8) == (9, MayBe(8))
 
         mb_sum9, it = sc_reduce_left(data, add, start=ge8, stop=ge2, include_start=False)
         try:
@@ -189,7 +189,7 @@ class Test_fp_sc_reduce_left:
         except StopIteration:
             assert False
         else:
-            assert (int10, mb_sum9) == (10, MB(9))
+            assert (int10, mb_sum9) == (10, MayBe(9))
 
         mb_empty, it = sc_reduce_left(data, add, start=ge8, stop=ge2, include_stop=False)
         try:
@@ -197,7 +197,7 @@ class Test_fp_sc_reduce_left:
         except StopIteration:
             assert False
         else:
-            assert (int8, mb_empty) == (8, MB())
+            assert (int8, mb_empty) == (8, MayBe())
 
         mb_empty, it = sc_reduce_left(
             data, add, start=ge8, stop=ge2, include_start=False, include_stop=False
@@ -207,7 +207,7 @@ class Test_fp_sc_reduce_left:
         except StopIteration:
             assert False
         else:
-            assert (int9, mb_empty) == (9, MB())
+            assert (int9, mb_empty) == (9, MayBe())
 
 
 class Test_fp_sc_reduce_right:
@@ -221,7 +221,7 @@ class Test_fp_sc_reduce_right:
             assert True
         else:
             assert False
-        assert mb_sum55 == MB(55)
+        assert mb_sum55 == MayBe(55)
 
     def test_start_stop(self) -> None:
         data = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
@@ -235,7 +235,7 @@ class Test_fp_sc_reduce_right:
         except StopIteration:
             assert False
         else:
-            assert (int8, mb_sum22) == (8, MB(22))
+            assert (int8, mb_sum22) == (8, MayBe(22))
 
         mb_sum15, it = sc_reduce_right(data, add, start=ge7, stop=le4, include_start=False)
         try:
@@ -243,7 +243,7 @@ class Test_fp_sc_reduce_right:
         except StopIteration:
             assert False
         else:
-            assert (int7, mb_sum15) == (7, MB(15))
+            assert (int7, mb_sum15) == (7, MayBe(15))
 
         mb_sum18, it = sc_reduce_right(data, add, start=ge7, stop=le4, include_stop=False)
         try:
@@ -251,7 +251,7 @@ class Test_fp_sc_reduce_right:
         except StopIteration:
             assert False
         else:
-            assert (int8, mb_sum18) == (8, MB(18))
+            assert (int8, mb_sum18) == (8, MayBe(18))
 
         mb_sum11, it = sc_reduce_right(
             data, add, start=ge7, stop=le4, include_start=False, include_stop=False
@@ -261,7 +261,7 @@ class Test_fp_sc_reduce_right:
         except StopIteration:
             assert False
         else:
-            assert (int7, mb_sum11) == (7, MB(11))
+            assert (int7, mb_sum11) == (7, MayBe(11))
 
     def test_start_stop_edge_case_all(self) -> None:
         data = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
@@ -274,7 +274,7 @@ class Test_fp_sc_reduce_right:
             next(it)
         except StopIteration:
             assert True
-        assert mb_sum55 == MB(55)
+        assert mb_sum55 == MayBe(55)
 
         mb_sum44, it = sc_reduce_right(
             data, add, start=ge10, stop=le1, include_start=False, include_stop=False
@@ -284,21 +284,21 @@ class Test_fp_sc_reduce_right:
         except StopIteration:
             assert False
         finally:
-            assert (int10, mb_sum44) == (10, MB(44))
+            assert (int10, mb_sum44) == (10, MayBe(44))
 
         mb_sum45, it = sc_reduce_right(data, add, start=ge10, stop=le1, include_start=False)
         try:
             int10 = next(it)
         except StopIteration:
             assert False
-        assert (int10, mb_sum45) == (10, MB(45))
+        assert (int10, mb_sum45) == (10, MayBe(45))
 
         mb_sum54, it = sc_reduce_right(data, add, start=ge10, stop=le1, include_stop=False)
         try:
             int10 = next(it)
         except StopIteration:
             assert True
-        assert mb_sum54 == MB(54)
+        assert mb_sum54 == MayBe(54)
 
     def test_start_stop_edge_case_next_to(self) -> None:
         data = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
@@ -311,7 +311,7 @@ class Test_fp_sc_reduce_right:
             int9 = next(it)
         except StopIteration:
             assert False
-        assert (int9, mb_sum15) == (9, MB(15))
+        assert (int9, mb_sum15) == (9, MayBe(15))
 
     def test_start_stop_edge_case_same(self) -> None:
         data = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
@@ -324,7 +324,7 @@ class Test_fp_sc_reduce_right:
             int9 = next(it)
         except StopIteration:
             assert False
-        assert (int9, mb_sum8) == (9, MB(8))
+        assert (int9, mb_sum8) == (9, MayBe(8))
 
         # ---------------------------------------------------------------
 
@@ -335,7 +335,7 @@ class Test_fp_sc_reduce_right:
             int8 = next(it)
         except StopIteration:
             assert False
-        assert (int8, mb_empty) == (8, MB())
+        assert (int8, mb_empty) == (8, MayBe())
 
         # ---------------------------------------------------------------
 
@@ -344,7 +344,7 @@ class Test_fp_sc_reduce_right:
             int9 = next(it)
         except StopIteration:
             assert False
-        assert (int9, mb_empty) == (9, MB())
+        assert (int9, mb_empty) == (9, MayBe())
 
         le7 = partial(swap(le_n), 7)
 
@@ -353,7 +353,7 @@ class Test_fp_sc_reduce_right:
             int9 = next(it)
         except StopIteration:
             assert False
-        assert (int9, mb_sum8) == (9, MB(8))
+        assert (int9, mb_sum8) == (9, MayBe(8))
 
         mb_empty, it = sc_reduce_right(
             data, add, start=ge8, stop=le7, include_start=False, include_stop=False
@@ -362,4 +362,4 @@ class Test_fp_sc_reduce_right:
             int8 = next(it)
         except StopIteration:
             assert False
-        assert (int8, mb_empty) == (8, MB())
+        assert (int8, mb_empty) == (8, MayBe())

@@ -22,7 +22,7 @@ __license__ = 'Apache License 2.0'
 
 from collections.abc import Callable, Iterable, Iterator
 from typing import cast, Never
-from pythonic_fp.containers.maybe import MayBe
+from pythonic_fp.fptools.maybe import MayBe
 from pythonic_fp.fptools.function import negate, swap
 from pythonic_fp.fptools.singletons import NoValue
 from .drop_take import drop_while, take_while_split
