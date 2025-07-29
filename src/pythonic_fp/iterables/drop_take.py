@@ -21,7 +21,8 @@ __copyright__ = 'Copyright (c) 2023-2025 Geoffrey R. Scheller'
 __license__ = 'Apache License 2.0'
 
 from collections.abc import Callable, Iterable, Iterator
-from pythonic_fp.containers.box import Box
+# from pythonic_fp.containers.box import Box
+from pythonic_fp.gadgets.box import Box
 from .merging import concat
 
 __all__ = [
