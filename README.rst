@@ -25,7 +25,7 @@ Documentation
 
 Documentation for this project is hosted on
 `GitHub Pages
-<https://grscheller.github.io/pythonic-fp/iterables/API/development/build/html/releases.html>`_.
+<https://grscheller.github.io/pythonic-fp/iterables/development/build/html>`_.
 
 Copyright and License
 ---------------------
