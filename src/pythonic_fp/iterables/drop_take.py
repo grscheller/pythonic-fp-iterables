@@ -40,13 +40,6 @@ __all__ = [
 def drop[D](iterable: Iterable[D], n: int) -> Iterator[D]:
     """Drop the next n values from iterable.
 
-    .. code:: python
-
-        def drop[D](
-            iterable: Iterable[D],
-            n: int
-        ) -> Iterator[D]
-
     :param iterable: iterable whose values are to be dropped
     :param n: number of values to be dropped
     :return: an iterator of the remaining values
@@ -66,13 +59,6 @@ def drop_while[D](
         pred: Callable[[D], bool]
     ) -> Iterator[D]:
     """Drop initial values from iterable while predicate is true.
-
-    .. code:: python
-
-        def drop_while[D](
-            iterable: Iterable[D],
-            pred: Callable[[D], bool]
-        ) -> Iterator[D]
 
     :param iterable: iterable whose values are to be dropped
     :param pred: Boolean valued function
@@ -94,13 +80,6 @@ def drop_while[D](
 def take[D](iterable: Iterable[D], n: int) -> Iterator[D]:
     """Return an iterator of up to n initial values of an iterable.
 
-    .. code:: python
-
-        def take[D](
-            iterable: Iterable[D],
-            n: int
-        ) -> Iterator[D]
-
     :param iterable: iterable providing the values to be taken
     :param n: number of values to be dropped
     :return: an iterator of up to n initial values from iterable
@@ -120,13 +99,6 @@ def take_while[D](
         pred: Callable[[D], bool]
     ) -> Iterator[D]:
     """Yield values from iterable while predicate is true.
-
-    .. code:: python
-
-        def take_while[D](
-            iterable: Iterable[D],
-            pred: Callable[[D], bool]
-        ) -> Iterator[D]
 
     .. warning::
         Risk of value loss if iterable is multiple referenced iterator.
@@ -154,13 +126,6 @@ def take_split[D](
     ) -> tuple[Iterator[D], Iterator[D]]:
     """Same as take except also return iterator of remaining values.
 
-    .. code:: python
-
-        def take_split[D](
-            iterable: Iterable[D],
-            n: int
-        ) -> tuple[Iterator[D], Iterator[D]]
-
     .. Warning::
 
        **CONTRACT:** Do not access the second returned iterator until the
@@ -181,13 +146,6 @@ def take_while_split[D](
     iterable: Iterable[D], pred: Callable[[D], bool]
 ) -> tuple[Iterator[D], Iterator[D]]:
     """Yield values from iterable while predicate is true.
-
-    .. code:: python
-
-        def take_while_split[D](
-            iterable: Iterable[D],
-            pred: Callable[[D], bool]
-        ) -> tuple[Iterator[D], Iterator[D]]
 
     .. Warning::
 

@@ -30,9 +30,9 @@ __all__ = [
 class MergeEnum(Enum):
     """Iterable Blending Enums.
 
-    - *MergeEnum.Concat*: Concatenate first to last
-    - *MergeEnum.Merge*: Merge until one is exhausted
-    - *MergeEnum.Exhaust*: Merge until all are exhausted
+    - **MergeEnum.Concat:** Concatenate first to last
+    - **MergeEnum.Merge:** Merge until one is exhausted
+    - **MergeEnum.Exhaust:** Merge until all are exhausted
 
     """
     Concat = auto()
@@ -44,20 +44,16 @@ class MergeEnum(Enum):
 def concat[D](*iterables: Iterable[D]) -> Iterator[D]:
     """Sequentially concatenate multiple iterables together.
 
-    .. code:: python
-
-        def concat[D](iterable: Iterable[D]) -> Iterator[D]
-
     .. warning::
         An infinite iterable will prevent subsequent iterables from
         yielding any values.
     
-    ,, note::
+    .. note::
 
         Performant to the standard library's ``itertools.chain``.
 
     :param iterables: iterables to concatenate
-    :return: an iterator of the concatenated values
+    :return: iterator of concatenated values from the iterables
 
     """
     for iterator in map(lambda x: iter(x), iterables):
@@ -75,22 +71,15 @@ def merge[D](
     ) -> Iterator[D]:
     """Merge together ``iterables`` until one is exhausted.
 
-    .. code:: python
-
-        def merge[D](
-            iterable: Iterable[D],
-            yield_partials: bool = False
-        ) -> Iterator[D]
-
     .. note::
 
-        When ``yield_partials`` is true, then any unmatched values from other iterables
-        already yielded when the first iterable is exhausted are yielded. This prevents
-        data lose if any of the iterables are iterators with external references.
+       When ``yield_partials`` is true, then any unmatched values from other iterables
+       already yielded when the first iterable is exhausted are yielded. This prevents
+       data lose if any of the iterables are iterators with external references.
 
     :param iterables: iterables to merge until one gets exhausted
     :param yield_partials: yield any unpaired yielded values from other iterables
-    :return: merged iterators
+    :return: iterator of merged values from the iterables until one is exhausted
 
     """
     iter_list = list(map(lambda x: iter(x), iterables))
@@ -111,12 +100,8 @@ def merge[D](
 def exhaust[D](*iterables: Iterable[D]) -> Iterator[D]:
     """Merge together multiple iterables until all are exhausted.
 
-    .. code:: python
-
-        def exhaust[D](iterables: Iterable[D]) -> Iterator[D]
-
     :param iterables: iterables to exhaustively merge
-    :return: merged iterators
+    :return: iterator of merged values from the iterables until all are exhausted
 
     """
     iter_list = list(map(lambda x: iter(x), iterables))
@@ -144,14 +129,6 @@ def blend[D](*iterables: Iterable[D],
         yield_partials: bool = False
     ) -> Iterator[D]:
     """Base merge behavior on name only parameters.
-
-    .. code:: python
-
-        def blend[D](
-            iterable: Iterable[D],
-            merge_enum: MergeEnum = MergeEnum.Concat,
-            yield_partials: bool = False
-        ) -> Iterator[D]
 
     :param iterables: iterables to blend together
     :param merge_enum: MergeEnum to determine merging behavior
