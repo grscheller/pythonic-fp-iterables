@@ -16,11 +16,16 @@ classifiers = [
   "Typing :: Typed",
 ]
 dependencies = [
-  "pythonic-fp.circulararray>=5.3.0",
-  "pythonic-fp.containers >=3.0.0",
-  "pythonic-fp.fptools >=5.0.0",
+  "pythonic-fp.fptools>=5.0.0",
+  "pythonic-fp.gadgets>=3.0.0",
+  "pythonic-fp.singletons>=1.0.0",
 ]
 dynamic = ["description"]
+
+[project.optional-dependencies]
+test = [
+  "pytest>=8.4.1",
+]
 
 [project.urls]
 Changelog = "https://github.com/grscheller/pythonic-fp-iterables/blob/main/CHANGELOG.rst"
@@ -31,9 +36,6 @@ Source = "https://github.com/grscheller/pythonic-fp-iterables"
 [build-system]
 requires = ["flit_core>=3.12,<4"]
 build-backend = "flit_core.buildapi"
-
-[tool.flit.sdist]
-exclude = ["dist", "tests", ".gitignore", ".mypy_cache", ".pytest_cache"]
 
 [tool.mypy]
 enable_incomplete_feature = ["NewGenericSyntax"]
