@@ -12,9 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Pythonic FP - Iterables
-
-Library of functions for iterating iterables.
+"""Library of functions for iterating iterables.
 
 +-----------+-------------------------------------------+
 | Module    | Description                               |
