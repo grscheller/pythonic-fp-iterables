@@ -45,13 +45,13 @@ def drop[D](iterable: Iterable[D], n: int) -> Iterator[D]:
     :return: an iterator of the remaining values
 
     """
-    it = iter(iterable)
+    iterator = iter(iterable)
     for _ in range(n):
         try:
-            next(it)
+            next(iterator)
         except StopIteration:
             break
-    return it
+    return iterator
 
 
 def drop_while[D](
@@ -65,16 +65,16 @@ def drop_while[D](
     :return: an iterator beginning where pred returned false
 
     """
-    it = iter(iterable)
+    iterator = iter(iterable)
     while True:
         try:
-            value = next(it)
+            value = next(iterator)
             if not pred(value):
-                it = concat((value,), it)
+                iterator = concat((value,), iterator)
                 break
         except StopIteration:
             break
-    return it
+    return iterator
 
 
 def take[D](iterable: Iterable[D], n: int) -> Iterator[D]:
@@ -85,10 +85,10 @@ def take[D](iterable: Iterable[D], n: int) -> Iterator[D]:
     :return: an iterator of up to n initial values from iterable
 
     """
-    it = iter(iterable)
+    iterator = iter(iterable)
     for _ in range(n):
         try:
-            value = next(it)
+            value = next(iterator)
             yield value
         except StopIteration:
             break
@@ -108,10 +108,10 @@ def take_while[D](
     :return: an Iterator of up to n initial values from the iterable
 
     """
-    it = iter(iterable)
+    iterator = iter(iterable)
     while True:
         try:
-            value = next(it)
+            value = next(iterator)
             if pred(value):
                 yield value
             else:
@@ -136,10 +136,10 @@ def take_split[D](
     :return: an iterator of values taken and an iterator of remaining values
 
     """
-    it = iter(iterable)
-    itn = take(it, n)
+    iterator = iter(iterable)
+    itn = take(iterator, n)
 
-    return itn, it
+    return itn, iterator
 
 
 def take_while_split[D](
@@ -158,11 +158,11 @@ def take_while_split[D](
 
     """
     def _take_while(
-        it: Iterator[D], pred: Callable[[D], bool], val: Box[D]
+        iterator: Iterator[D], pred: Callable[[D], bool], val: Box[D]
     ) -> Iterator[D]:
         while True:
             try:
-                val.put(next(it))
+                val.put(next(iterator))
                 if pred(val.get()):
                     yield val.pop()
                 else:
@@ -170,8 +170,8 @@ def take_while_split[D](
             except StopIteration:
                 break
 
-    it = iter(iterable)
+    iterator = iter(iterable)
     value: Box[D] = Box()
-    it_pred = _take_while(it, pred, value)
+    it_pred = _take_while(iterator, pred, value)
 
-    return (it_pred, concat(value, it))
+    return (it_pred, concat(value, iterator))
