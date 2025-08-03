@@ -49,7 +49,7 @@ def accumulate[D, L](
     - begins accumulation with an "optional" ``initial`` value
 
     :param iterable: iterable to be folded
-    :param f: 2 parameter function, first parameter for accumulated value
+    :param f: two parameter function, first parameter for accumulated value
     :param initial: "optional" initial value to start fold
     :return: an iterator of the intermediate fold values
 
@@ -93,10 +93,10 @@ def reduce_left[D](
        This function does not catch or re-raises exceptions from ``f``.
 
     :param iterable: iterable to be reduced (folded)
-    :param f: 2 parameter function, first parameter for accumulated value
+    :param f: two parameter function, first parameter for accumulated value
     :return: reduced value from the iterable
     :raises StopIteration: when called on an empty iterable
-    :raises Exception: does not catch or re-raises exceptions from ``f``.
+    :raises Exception: does not catch any exceptions from ``f``
 
     """
     it = iter(iterable)
@@ -132,7 +132,7 @@ def fold_left[D, L](
        This function does not catch any exceptions ``f`` may raise.
 
     :param iterable: iterable to be folded
-    :param f: 2 parameter function, first parameter for accumulated value
+    :param f: two parameter function, first parameter for accumulated value
     :param initial: mandatory initial value to start fold
     :return: the folded value
 
@@ -150,7 +150,6 @@ def maybe_fold_left[D, L](
     ) -> MayBe[L] | Never:
     """Folds an iterable left with an "optional" initial value..
 
-    - traditional FP type order given for function ``f``
     - when an initial value is not given then ``L = D``
     - if iterable empty and no ``initial`` value given, return ``MayBe()``
 
@@ -160,12 +159,13 @@ def maybe_fold_left[D, L](
 
     .. Warning::
 
-       This function does not catch any exceptions ``f`` may raise.
+        This function returns a ``MayBe()`` when ``f`` raises any
+        exception what-so-ever. The exception is thrown away.
 
     :param iterable: The iterable to be folded.
     :param f: First argument is for the accumulated value.
     :param initial: Mandatory initial value to start fold.
-    :return: Folded value if it exists.
+    :return: MayBe of a successfully folded value, otherwise MayBe()
 
     """
     acc: L
@@ -206,12 +206,12 @@ def sc_reduce_left[D](
     - continue folding until end (of a possibly infinite iterable)
 
     :param iterable: iterable to be reduced from the left
-    :param f: 2 parameter function, first parameter for accumulated value
+    :param f: two parameter function, first parameter for accumulated value
     :param start: delay starting the fold until it returns true
     :param stop: prematurely stop the fold when it returns true
     :param include_start: if true, include fold starting value in fold
     :param include_stop: if true, include stopping value in fold
-    :return: MayBe of the folded value and remaining iterables
+    :return: tuple of a MayBe of the folded value and iterator of remaining iterables
 
     """
     it_start = drop_while(iterable, negate(start))
@@ -258,12 +258,12 @@ def sc_reduce_right[D](
     - continue reducing right until beginning
 
     :param iterable: iterable to be reduced from the right
-    :param f: 2 parameter function, second parameter for accumulated value
+    :param f: two parameter function, second parameter for accumulated value
     :param start: delay starting the fold until it returns true
     :param stop: prematurely stop the fold when it returns true
     :param include_start: if true, include fold starting value in fold
     :param include_stop: if true, include stopping value in fold
-    :return: MayBe of the folded value and remaining iterables
+    :return: tuple of a MayBe of the folded value and iterator of remaining iterables
 
     """
     it_start, it_rest = take_while_split(iterable, negate(start))

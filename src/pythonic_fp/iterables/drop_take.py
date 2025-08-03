@@ -61,7 +61,7 @@ def drop_while[D](
     """Drop initial values from iterable while predicate is true.
 
     :param iterable: iterable whose values are to be dropped
-    :param pred: Boolean valued function
+    :param pred: Boolean valued function, the "predicate"
     :return: an iterator beginning where pred returned false
 
     """
@@ -104,8 +104,8 @@ def take_while[D](
         Risk of value loss if iterable is multiple referenced iterator.
 
     :param iterable: iterable providing the values to be taken
-    :param pred: Boolean valued function
-    :return: an Iterator of up to n initial values from the iterable
+    :param pred: Boolean valued function, the "predicate"
+    :return: an Iterator of of values from iterable until predicate false
 
     """
     iterator = iter(iterable)
@@ -154,7 +154,7 @@ def take_while_split[D](
 
     :param iterable: iterable providing the values to be taken
     :param pred: Boolean valued function
-    :return: an iterator of values taken and an iterator of remaining values
+    :return: tuple containing an iterator of values taken and an iterator of remaining values
 
     """
     def _take_while(

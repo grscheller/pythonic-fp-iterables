@@ -39,7 +39,6 @@ class MergeEnum(Enum):
     Merge = auto()
     Exhaust = auto()
 
-# Iterate over multiple iterables
 
 def concat[D](*iterables: Iterable[D]) -> Iterator[D]:
     """Sequentially concatenate multiple iterables together.
@@ -123,6 +122,7 @@ def exhaust[D](*iterables: Iterable[D]) -> Iterator[D]:
                 del iter_list[ii]
 
         yield from values
+
 
 def blend[D](*iterables: Iterable[D],
         merge_enum: MergeEnum = MergeEnum.Concat,
