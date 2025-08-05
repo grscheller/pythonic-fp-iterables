@@ -143,7 +143,7 @@ class Test_fp_sc_reduce_left:
         else:
             assert False
 
-    def test_start_stop(self) -> None:
+    def test_start_stop(self) -> None:  # noqa: C901
         data = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
 
         ge2 = partial(swap(ge_n), 2)
