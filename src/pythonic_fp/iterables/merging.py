@@ -14,8 +14,6 @@
 
 """Module pythonic_fp.iterables.merging"""
 
-from __future__ import annotations
-
 from collections.abc import Iterable, Iterator
 from enum import auto, Enum
 
@@ -27,6 +25,7 @@ __all__ = [
     'blend',
 ]
 
+
 class MergeEnum(Enum):
     """Iterable Blending Enums.
 
@@ -35,6 +34,7 @@ class MergeEnum(Enum):
     - **MergeEnum.Exhaust:** Merge until all are exhausted
 
     """
+
     Concat = auto()
     Merge = auto()
     Exhaust = auto()
@@ -46,7 +46,7 @@ def concat[D](*iterables: Iterable[D]) -> Iterator[D]:
     .. warning::
         An infinite iterable will prevent subsequent iterables from
         yielding any values.
-    
+
     .. note::
 
         Performant to the standard library's ``itertools.chain``.
@@ -64,10 +64,7 @@ def concat[D](*iterables: Iterable[D]) -> Iterator[D]:
                 break
 
 
-def merge[D](
-        *iterables: Iterable[D],
-        yield_partials: bool = False
-    ) -> Iterator[D]:
+def merge[D](*iterables: Iterable[D], yield_partials: bool = False) -> Iterator[D]:
     """Merge together ``iterables`` until one is exhausted.
 
     .. note::
@@ -124,10 +121,11 @@ def exhaust[D](*iterables: Iterable[D]) -> Iterator[D]:
         yield from values
 
 
-def blend[D](*iterables: Iterable[D],
-        merge_enum: MergeEnum = MergeEnum.Concat,
-        yield_partials: bool = False
-    ) -> Iterator[D]:
+def blend[D](
+    *iterables: Iterable[D],
+    merge_enum: MergeEnum = MergeEnum.Concat,
+    yield_partials: bool = False,
+) -> Iterator[D]:
     """Base merge behavior on name only parameters.
 
     :param iterables: iterables to blend together
@@ -141,7 +139,7 @@ def blend[D](*iterables: Iterable[D],
         case MergeEnum.Concat:
             return concat(*iterables)
         case MergeEnum.Merge:
-            return merge(*iterables, yield_partials = yield_partials)
+            return merge(*iterables, yield_partials=yield_partials)
         case MergeEnum.Exhaust:
             return exhaust(*iterables)
 

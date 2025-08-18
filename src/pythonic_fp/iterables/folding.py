@@ -14,12 +14,6 @@
 
 """Module pythonic_fp.iterables.folding"""
 
-from __future__ import annotations
-
-__author__ = 'Geoffrey R. Scheller'
-__copyright__ = 'Copyright (c) 2023-2025 Geoffrey R. Scheller'
-__license__ = 'Apache License 2.0'
-
 from collections.abc import Callable, Iterable, Iterator
 from typing import cast, Never
 from pythonic_fp.fptools.function import negate, swap
@@ -36,11 +30,10 @@ __all__ = [
     'sc_reduce_right',
 ]
 
+
 def accumulate[D, L](
-        iterable: Iterable[D],
-        f: Callable[[L, D], L],
-        initial: L | NoValue = NoValue()
-    ) -> Iterator[L]:
+    iterable: Iterable[D], f: Callable[[L, D], L], initial: L | NoValue = NoValue()
+) -> Iterator[L]:
     """Returns an iterator of partial fold values.
 
     A pure Python version of standard library's ``itertools.accumulate``
@@ -78,10 +71,7 @@ def accumulate[D, L](
             yield acc
 
 
-def reduce_left[D](
-        iterable: Iterable[D],
-        f: Callable[[D, D], D]
-    ) -> D | Never:
+def reduce_left[D](iterable: Iterable[D], f: Callable[[D, D], D]) -> D | Never:
     """Fold an iterable left with a function.
 
     .. Warning::
@@ -113,10 +103,8 @@ def reduce_left[D](
 
 
 def fold_left[D, L](
-        iterable: Iterable[D],
-        f: Callable[[L, D], L],
-        initial: L
-    ) -> L | Never:
+    iterable: Iterable[D], f: Callable[[L, D], L], initial: L
+) -> L | Never:
     """Fold an iterable left with a function and initial value.
 
     - not restricted to ``__add__`` for the folding function
@@ -144,10 +132,8 @@ def fold_left[D, L](
 
 
 def maybe_fold_left[D, L](
-        iterable: Iterable[D],
-        f: Callable[[L, D], L],
-        initial: L | NoValue = NoValue()
-    ) -> MayBe[L] | Never:
+    iterable: Iterable[D], f: Callable[[L, D], L], initial: L | NoValue = NoValue()
+) -> MayBe[L] | Never:
     """Folds an iterable left with an "optional" initial value..
 
     - when an initial value is not given then ``L = D``
@@ -188,13 +174,13 @@ def maybe_fold_left[D, L](
 
 
 def sc_reduce_left[D](
-        iterable: Iterable[D],
-        f: Callable[[D, D], D],
-        start: Callable[[D], bool] = (lambda d: True),
-        stop: Callable[[D], bool] = (lambda d: False),
-        include_start: bool = True,
-        include_stop: bool = True,
-    ) -> tuple[MayBe[D], Iterator[D]]:
+    iterable: Iterable[D],
+    f: Callable[[D, D], D],
+    start: Callable[[D], bool] = (lambda d: True),
+    stop: Callable[[D], bool] = (lambda d: False),
+    include_start: bool = True,
+    include_stop: bool = True,
+) -> tuple[MayBe[D], Iterator[D]]:
     """Short circuit version of a left reduce.
 
     Useful for infinite iterables.
@@ -240,13 +226,13 @@ def sc_reduce_left[D](
 
 
 def sc_reduce_right[D](
-        iterable: Iterable[D],
-        f: Callable[[D, D], D],
-        start: Callable[[D], bool] = (lambda d: False),
-        stop: Callable[[D], bool] = (lambda d: False),
-        include_start: bool = True,
-        include_stop: bool = True,
-    ) -> tuple[MayBe[D], Iterator[D]]:
+    iterable: Iterable[D],
+    f: Callable[[D, D], D],
+    start: Callable[[D], bool] = (lambda d: False),
+    stop: Callable[[D], bool] = (lambda d: False),
+    include_start: bool = True,
+    include_stop: bool = True,
+) -> tuple[MayBe[D], Iterator[D]]:
     """Short circuit version of a right reduce.
 
     Useful for infinite and non-reversible iterables.

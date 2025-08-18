@@ -14,12 +14,6 @@
 
 """Module pythonic_fp.iterables.drop_take"""
 
-from __future__ import annotations
-
-__author__ = 'Geoffrey R. Scheller'
-__copyright__ = 'Copyright (c) 2023-2025 Geoffrey R. Scheller'
-__license__ = 'Apache License 2.0'
-
 from collections.abc import Callable, Iterable, Iterator
 from pythonic_fp.gadgets.box import Box
 from .merging import concat
@@ -54,10 +48,7 @@ def drop[D](iterable: Iterable[D], n: int) -> Iterator[D]:
     return iterator
 
 
-def drop_while[D](
-        iterable: Iterable[D],
-        pred: Callable[[D], bool]
-    ) -> Iterator[D]:
+def drop_while[D](iterable: Iterable[D], pred: Callable[[D], bool]) -> Iterator[D]:
     """Drop initial values from iterable while predicate is true.
 
     :param iterable: iterable whose values are to be dropped
@@ -94,10 +85,7 @@ def take[D](iterable: Iterable[D], n: int) -> Iterator[D]:
             break
 
 
-def take_while[D](
-        iterable: Iterable[D],
-        pred: Callable[[D], bool]
-    ) -> Iterator[D]:
+def take_while[D](iterable: Iterable[D], pred: Callable[[D], bool]) -> Iterator[D]:
     """Yield values from iterable while predicate is true.
 
     .. warning::
@@ -120,10 +108,7 @@ def take_while[D](
             break
 
 
-def take_split[D](
-        iterable: Iterable[D],
-        n: int
-    ) -> tuple[Iterator[D], Iterator[D]]:
+def take_split[D](iterable: Iterable[D], n: int) -> tuple[Iterator[D], Iterator[D]]:
     """Same as take except also return iterator of remaining values.
 
     .. Warning::
@@ -157,6 +142,7 @@ def take_while_split[D](
     :return: tuple containing an iterator of values taken and an iterator of remaining values
 
     """
+
     def _take_while(
         iterator: Iterator[D], pred: Callable[[D], bool], val: Box[D]
     ) -> Iterator[D]:
