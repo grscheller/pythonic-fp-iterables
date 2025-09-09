@@ -17,8 +17,8 @@ See `Semantic Versioning 2.0.0 <https://semver.org>`_.
 Releases and Important Milestones
 ---------------------------------
 
-5.1.0 - TBD
-~~~~~~~~~~~
+5.1.0 - 2025-08-02
+~~~~~~~~~~~~~~~~~~
 
 - changed singletons -> sentinels
 - Removed "from __future__ import annotations"
