@@ -12,7 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Library of functions for iterating iterables.
+"""
+Library of functions for iterating iterables
+============================================
 
 +-----------+-------------------------------------------+
 | Module    | Description                               |
@@ -24,7 +26,8 @@
 | folding   | Reducing and accumulating iterables       |
 +-----------+-------------------------------------------+
 
-Assumptions:
+Assumptions
+-----------
 
 - iterables are not necessarily iterators
 - at all times iterator protocol is assumed to be followed

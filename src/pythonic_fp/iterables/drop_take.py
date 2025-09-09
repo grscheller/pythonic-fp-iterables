@@ -12,7 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Module pythonic_fp.iterables.drop_take"""
+"""
+Module pythonic_fp.iterables.drop_take
+"""
 
 from collections.abc import Callable, Iterable, Iterator
 from pythonic_fp.gadgets.box import Box
@@ -36,7 +38,7 @@ def drop[D](iterable: Iterable[D], n: int) -> Iterator[D]:
 
     :param iterable: iterable whose values are to be dropped
     :param n: number of values to be dropped
-    :return: an iterator of the remaining values
+    :returns: an iterator of the remaining values
 
     """
     iterator = iter(iterable)

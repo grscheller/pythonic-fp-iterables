@@ -17,6 +17,18 @@ See `Semantic Versioning 2.0.0 <https://semver.org>`_.
 Releases and Important Milestones
 ---------------------------------
 
+5.1.0 - TBD
+~~~~~~~~~~~
+
+- changed singletons -> sentinels
+- Removed "from __future__ import annotations"
+- Added .pyi files
+
+5.0.0 - 2025-08-02
+~~~~~~~~~~~~~~~~~~
+
+General consistency tweaks and fixes across all pythonic-fp projects.
+
 4.0.0 - 2025-07-16
 ~~~~~~~~~~~~~~~~~~
 
