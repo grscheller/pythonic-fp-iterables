@@ -1,6 +1,6 @@
 [project]
 name = "pythonic-fp-iterables"
-version = "5.1.0"
+version = "5.1.2"
 readme = "README.rst"
 requires-python = ">=3.13"
 license = { file = "LICENSE" }
@@ -16,9 +16,9 @@ classifiers = [
   "Typing :: Typed",
 ]
 dependencies = [
-  "pythonic-fp-fptools>=5.1.0",
+  "pythonic-fp-fptools>=5.1.1",
   "pythonic-fp-gadgets>=3.0.1",
-  "pythonic-fp-sentinels>=2.1.1",
+  "pythonic-fp-sentinels>=2.1.0",
 ]
 dynamic = ["description"]
 

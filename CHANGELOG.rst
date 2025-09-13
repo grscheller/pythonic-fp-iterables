@@ -17,6 +17,11 @@ See `Semantic Versioning 2.0.0 <https://semver.org>`_.
 Releases and Important Milestones
 ---------------------------------
 
+5.1.1 - 2025-08-02
+~~~~~~~~~~~~~~~~~~
+
+Only docsstring changes.
+
 5.1.0 - 2025-08-02
 ~~~~~~~~~~~~~~~~~~
 
