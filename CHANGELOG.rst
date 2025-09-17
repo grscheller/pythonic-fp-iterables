@@ -17,25 +17,25 @@ See `Semantic Versioning 2.0.0 <https://semver.org>`_.
 Releases and Important Milestones
 ---------------------------------
 
-5.1.1 - 2025-08-02
-~~~~~~~~~~~~~~~~~~
+PyPI 5.1.1 - 2025-08-02
+~~~~~~~~~~~~~~~~~~~~~~~
 
-Only docsstring changes.
+Only docstring changes.
 
-5.1.0 - 2025-08-02
-~~~~~~~~~~~~~~~~~~
+PyPI 5.1.0 - 2025-08-02
+~~~~~~~~~~~~~~~~~~~~~~~
 
 - changed singletons -> sentinels
 - Removed "from __future__ import annotations"
 - Added .pyi files
 
-5.0.0 - 2025-08-02
-~~~~~~~~~~~~~~~~~~
+PyPI 5.0.0 - 2025-08-02
+~~~~~~~~~~~~~~~~~~~~~~~
 
 General consistency tweaks and fixes across all pythonic-fp projects.
 
-4.0.0 - 2025-07-16
-~~~~~~~~~~~~~~~~~~
+PyPI 4.0.0 - 2025-07-16
+~~~~~~~~~~~~~~~~~~~~~~~
 
 Primary purpose was to bring Sphinx documentation in alignment
 with other pythonic-fp projects. Ended up making substantial
@@ -46,15 +46,15 @@ for the other pythonic-fp projects.
 
   - renamed pythonic_fp.iterables.foldl to pythonic_fp.iterables.fold_left
 
-3.0.0 - 2025-07-06
-~~~~~~~~~~~~~~~~~~
+PyPI 3.0.0 - 2025-07-06
+~~~~~~~~~~~~~~~~~~~~~~~
 
 First PyPI release as ``pythonic-fp.iterables``
 
 - dropping dtools namespace name because there is a repo by that name.
 
-2.0.0 - 2025-05-22
-~~~~~~~~~~~~~~~~~~
+PyPI 2.0.0 - 2025-05-22
+~~~~~~~~~~~~~~~~~~~~~~~
 
 - Moved dtools.fp.iterables to its own PyPI project
 
@@ -68,8 +68,8 @@ First PyPI release as ``pythonic-fp.iterables``
 
     - will import dtools.fp.lazy directly for this functionality
 
-1.7.0 - 2025-04-22
-~~~~~~~~~~~~~~~~~~
+PyPI 1.7.0 - 2025-04-22
+~~~~~~~~~~~~~~~~~~~~~~~
 
 Last PyPI release as dtools.fp
 
@@ -78,21 +78,21 @@ Last PyPI release as dtools.fp
 - docstring changes
 - pyproject.toml standardization
 
-1.6.0 - 2025-04-07
-~~~~~~~~~~~~~~~~~~
+PyPI 1.6.0 - 2025-04-07
+~~~~~~~~~~~~~~~~~~~~~~~
 
 - typing improvements
 
-1.4.0 - 2025-03-16
-~~~~~~~~~~~~~~~~~~
+PyPI 1.4.0 - 2025-03-16
+~~~~~~~~~~~~~~~~~~~~~~~
 
 - much work dtools.iterables
 
   - finally implemented scReduceL and scReduceR functions
   - tweaked API across iterables module
 
-1.3.0 - 2025-01-17
-~~~~~~~~~~~~~~~~~~
+PyPI 1.3.0 - 2025-01-17
+~~~~~~~~~~~~~~~~~~~~~~~
 
 First release as dtools.fp
 
@@ -101,85 +101,73 @@ Repo name changes.
 - GitHub: fp -> dtools-fp
 - PyPI: grscheller.fp -> dtools.fp
 
-1.0.1 - 2024-10-20
-~~~~~~~~~~~~~~~~~~
+PyPI 1.0.1 - 2024-10-20
+~~~~~~~~~~~~~~~~~~~~~~~
 
 - removed docs from repo
 - docs for all grscheller namespace projects maintained here
  
   - https://grscheller.github.io/grscheller-pypi-namespace-docs/
 
-1.0.0 - 2024-10-18
-~~~~~~~~~~~~~~~~~~
+PyPI 1.0.0 - 2024-10-18
+~~~~~~~~~~~~~~~~~~~~~~~
 
 Decided to make this release first stable release.
 
 - renamed module fp.woException to fp.err_handling
 - pytest improvements based on pytest documentation
 
-0.4.0 - 2024-10-03
-~~~~~~~~~~~~~~~~~~
+PyPI 0.4.0 - 2024-10-03
+~~~~~~~~~~~~~~~~~~~~~~~
 
 Long overdue PyPI release.
 
-0.3.4.0 - 2024-09-30
-~~~~~~~~~~~~~~~~~~~~
+Version 0.3.4.0 - 2024-09-30 (Devel environment only)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Development environment only.
+API change for fp.iterables.
 
-- API change for fp.iterables
+- function name changes
 
-  - function name changes
+  - ``foldL``, ``foldR``, ``foldLsc``, ``foldRsc``
+  - ``sc`` stands for "short circuit"
 
-    - ``foldL``, ``foldR``, ``foldLsc``, ``foldRsc``
-    - ``sc`` stands for "short circuit"
+- all now return class woException.MB
 
-  - all now return class woException.MB
+Version 0.3.3.7 - 2024-09-22 (Devel environment only)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-0.3.3.7 - 2024-09-22
-~~~~~~~~~~~~~~~~~~~~
+Added more functions to fp.iterables module.
 
-Development environment only.
+- take(it: Iterable[D], n: int) -> Iterator[D]
+- takeWhile(it: Iterable[D], pred: Callable\[[D], bool\]) -> Iterator[D]
+- drop(it: Iterable[D], n: int) -> Iterator[D]
+- dropWhile(it: Iterable[D], pred: Callable\[[D], bool\]) -> Iterator[D]
 
-- added more functions to fp.iterables module
+Version 0.3.3.4 - 2024-09-16 (Devel environment only)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  - take(it: Iterable[D], n: int) -> Iterator[D]
-  - takeWhile(it: Iterable[D], pred: Callable\[[D], bool\]) -> Iterator[D]
-  - drop(it: Iterable[D], n: int) -> Iterator[D]
-  - dropWhile(it: Iterable[D], pred: Callable\[[D], bool\]) -> Iterator[D]
+Both ``foldL_sc`` and ``foldR_sc`` now have a common paradigm
+and similar signatures.
 
-0.3.3.4 - 2024-09-16
-~~~~~~~~~~~~~~~~~~~~
+Version 0.3.3.3 - 2024-09-15 (Devel environment only)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Development environment only.
+Added fp.iterables function ``foldR_sc``
 
-- fp.iterables ``foldL_sc`` & ``foldR_sc`` now have
+- shortcut version of ``foldR``
+- not fully tested
+- docstring not updated
 
-  - common paradigm
-  - similar signatures
+Version 0.3.3.2 - 2024-09-14 (Devel environment only)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-0.3.3.3 - 2024-09-15
-~~~~~~~~~~~~~~~~~~~~
+Added ``foldL_sc``, shortcut version of foldL, 
+to fp.iterables.
 
-Development environment only.
 
-- added fp.iterables function ``foldR_sc``
-
-  - shortcut version of ``foldR``
-  - not fully tested
-  - docstring not updated
-
-0.3.3.2 - 2024-09-14
-~~~~~~~~~~~~~~~~~~~~
-
-Development environment only.
-
-- added fp.iterables function ``foldL_sc``
-
-  - shortcut version of foldL
-
-0.3.1 - 2024-08-20
-~~~~~~~~~~~~~~~~~~
+PyPI 0.3.1 - 2024-08-20
+~~~~~~~~~~~~~~~~~~~~~~~
 
 Now fp.iterables no longer exports ``CONCAT``, ``MERGE``, ``EXHAUST``.
 
@@ -188,8 +176,8 @@ Now fp.iterables no longer exports ``CONCAT``, ``MERGE``, ``EXHAUST``.
   - grscheller.datastructures.ftuple
   - grscheller.datastructures.split_ends
 
-0.2.0 - 2024-07-26
-~~~~~~~~~~~~~~~~~~
+PyPI 0.2.0 - 2024-07-26
+~~~~~~~~~~~~~~~~~~~~~~~
 
 - from last PyPI release
 
@@ -197,8 +185,8 @@ Now fp.iterables no longer exports ``CONCAT``, ``MERGE``, ``EXHAUST``.
 
 - overall much better docstrings
 
-0.1.0 - 2024-07-11
-~~~~~~~~~~~~~~~~~~
+PyPI 0.1.0 - 2024-07-11
+~~~~~~~~~~~~~~~~~~~~~~~
 
 Initial PyPI release as grscheller.fp
 
