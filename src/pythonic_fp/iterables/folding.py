@@ -18,7 +18,7 @@ from collections.abc import Callable, Iterable, Iterator
 from typing import cast, Never
 from pythonic_fp.fptools.function import negate, swap
 from pythonic_fp.fptools.maybe import MayBe
-from pythonic_fp.sentinels.novalue import NoValue
+from pythonic_fp.gadgets.sentinels.novalue import NoValue
 from .drop_take import drop_while, take_while_split
 
 __all__ = [

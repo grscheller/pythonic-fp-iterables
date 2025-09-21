@@ -51,8 +51,8 @@ def concat[D](*iterables: Iterable[D]) -> Iterator[D]:
 
         Performant to the standard library's ``itertools.chain``.
 
-    :param iterables: iterables to concatenate
-    :return: iterator of concatenated values from the iterables
+    :param iterables: Iterables to concatenate.
+    :returns: Iterator of concatenated values from the iterables.
 
     """
     for iterator in map(lambda x: iter(x), iterables):
@@ -69,13 +69,13 @@ def merge[D](*iterables: Iterable[D], yield_partials: bool = False) -> Iterator[
 
     .. note::
 
-       When ``yield_partials`` is true, then any unmatched values from other iterables
-       already yielded when the first iterable is exhausted are yielded. This prevents
-       data lose if any of the iterables are iterators with external references.
+        When ``yield_partials`` is true, then any unmatched values from other iterables
+        already yielded when the first iterable is exhausted are yielded. This prevents
+        data lose if any of the iterables are iterators with external references.
 
-    :param iterables: iterables to merge until one gets exhausted
-    :param yield_partials: yield any unpaired yielded values from other iterables
-    :return: iterator of merged values from the iterables until one is exhausted
+    :param iterables: Iterables to merge until one gets exhausted.
+    :param yield_partials: Yield any unpaired yielded values from other iterables.
+    :returns: Iterator of merged values from the iterables until one is exhausted.
 
     """
     iter_list = list(map(lambda x: iter(x), iterables))
@@ -96,8 +96,8 @@ def merge[D](*iterables: Iterable[D], yield_partials: bool = False) -> Iterator[
 def exhaust[D](*iterables: Iterable[D]) -> Iterator[D]:
     """Merge together multiple iterables until all are exhausted.
 
-    :param iterables: iterables to exhaustively merge
-    :return: iterator of merged values from the iterables until all are exhausted
+    :param iterables: Iterables to exhaustively merge.
+    :returns: Iterator of merged values from the iterables until all are exhausted.
 
     """
     iter_list = list(map(lambda x: iter(x), iterables))
@@ -128,11 +128,11 @@ def blend[D](
 ) -> Iterator[D]:
     """Base merge behavior on name only parameters.
 
-    :param iterables: iterables to blend together
-    :param merge_enum: MergeEnum to determine merging behavior
-    :param yield_partials: yield yielded unpaired values from other iterables
-    :return: an iterator of type D
-    :raises ValueError: when an unknown MergeEnum is given
+    :param iterables: Iterables to blend together.
+    :param merge_enum: ``MergeEnum`` to determine merging behavior.
+    :param yield_partials: Yield unpaired values from other iterables.
+    :returns: An iterator of type ``D``.
+    :raises ValueError: When an unknown ``MergeEnum`` is given.
 
     """
     match merge_enum:

@@ -36,9 +36,9 @@ __all__ = [
 def drop[D](iterable: Iterable[D], n: int) -> Iterator[D]:
     """Drop the next n values from iterable.
 
-    :param iterable: iterable whose values are to be dropped
-    :param n: number of values to be dropped
-    :returns: an iterator of the remaining values
+    :param iterable: Iterable whose values are to be dropped.
+    :param n: Number of values to be dropped.
+    :returns: An iterator of the remaining values.
 
     """
     iterator = iter(iterable)
@@ -53,9 +53,9 @@ def drop[D](iterable: Iterable[D], n: int) -> Iterator[D]:
 def drop_while[D](iterable: Iterable[D], pred: Callable[[D], bool]) -> Iterator[D]:
     """Drop initial values from iterable while predicate is true.
 
-    :param iterable: iterable whose values are to be dropped
-    :param pred: Boolean valued function, the "predicate"
-    :return: an iterator beginning where pred returned false
+    :param iterable: Iterable whose values are to be dropped.
+    :param pred: Single argument Boolean valued function, the "predicate".
+    :returns: An iterator beginning where pred returned false.
 
     """
     iterator = iter(iterable)
@@ -73,9 +73,9 @@ def drop_while[D](iterable: Iterable[D], pred: Callable[[D], bool]) -> Iterator[
 def take[D](iterable: Iterable[D], n: int) -> Iterator[D]:
     """Return an iterator of up to n initial values of an iterable.
 
-    :param iterable: iterable providing the values to be taken
-    :param n: number of values to be dropped
-    :return: an iterator of up to n initial values from iterable
+    :param Iterable: iterable providing the values to be taken.
+    :param n: Number of values to be dropped.
+    :returns: An iterator of up to n initial values from iterable.
 
     """
     iterator = iter(iterable)
@@ -91,11 +91,12 @@ def take_while[D](iterable: Iterable[D], pred: Callable[[D], bool]) -> Iterator[
     """Yield values from iterable while predicate is true.
 
     .. warning::
+
         Risk of value loss if iterable is multiple referenced iterator.
 
-    :param iterable: iterable providing the values to be taken
-    :param pred: Boolean valued function, the "predicate"
-    :return: an Iterator of of values from iterable until predicate false
+    :param iterable: Iterable providing the values to be taken.
+    :param pred: Single argument Boolean valued function, the "predicate".
+    :returns: An Iterator of of values from iterable until predicate false.
 
     """
     iterator = iter(iterable)
@@ -115,12 +116,12 @@ def take_split[D](iterable: Iterable[D], n: int) -> tuple[Iterator[D], Iterator[
 
     .. Warning::
 
-       **CONTRACT:** Do not access the second returned iterator until the
-       first one is exhausted.
+        **CONTRACT:** Do not access the second returned iterator until the
+        first one is exhausted.
 
-    :param iterable: iterable providing the values to be taken
-    :param n: maximum number of values to be taken
-    :return: an iterator of values taken and an iterator of remaining values
+    :param iterable: Iterable providing the values to be taken.
+    :param n: maximum Number of values to be taken.
+    :returns: An iterator of values taken and an iterator of remaining values.
 
     """
     iterator = iter(iterable)
@@ -136,12 +137,12 @@ def take_while_split[D](
 
     .. Warning::
 
-       **CONTRACT:** Do not access the second returned iterator until
-       the first one is exhausted.
+        **CONTRACT:** Do not access the second returned iterator until
+        the first one is exhausted.
 
-    :param iterable: iterable providing the values to be taken
-    :param pred: Boolean valued function
-    :return: tuple containing an iterator of values taken and an iterator of remaining values
+    :param iterable: Iterable providing the values to be taken.
+    :param pred: Single argument Boolean valued function.
+    :returns: Tuple of iterator of values taken and an iterator of remaining values.
 
     """
 
