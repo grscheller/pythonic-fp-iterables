@@ -17,8 +17,10 @@ Library of functions for iterating iterables.
     - all iterators are assumed to be iterable
     - for all iterators ``foo`` we assume ``iter(foo) is foo``
 
-This PyPI project is part of of the
-`pythonic-fp namespace projects <https://github.com/grscheller/pythonic-fp/blob/main/README.md>`_
+Part of the
+`pythonic-fp
+<https://grscheller.github.io/pythonic-fp/overview/next/build/html/index.html>`_
+PyPI projects.
 
 Documentation
 -------------
