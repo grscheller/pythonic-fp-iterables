@@ -13,7 +13,13 @@
 # limitations under the License.
 
 """
-Module pythonic_fp.iterables.drop_take
+Drop and Take
+-------------
+
+.. admonition:: module pythonic_fp.iterables.drop_take
+
+    Functions to drop or take values from an iterable.
+
 """
 
 from collections.abc import Callable, Iterable, Iterator
@@ -28,9 +34,6 @@ __all__ = [
     'take_split',
     'take_while_split',
 ]
-
-
-## dropping and taking
 
 
 def drop[D](iterable: Iterable[D], n: int) -> Iterator[D]:
@@ -163,4 +166,4 @@ def take_while_split[D](
     value: Box[D] = Box()
     it_pred = _take_while(iterator, pred, value)
 
-    return (it_pred, concat(value, iterator))
+    return it_pred, concat(value, iterator)

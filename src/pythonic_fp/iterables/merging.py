@@ -12,7 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Module pythonic_fp.iterables.merging"""
+"""
+Merging Iterables
+-----------------
+
+.. admonition:: module pythonic_fp.iterables.merging
+
+    Functions to merge multiple iterables together into one.
+
+"""
 
 from collections.abc import Iterable, Iterator
 from enum import auto, Enum
@@ -126,7 +134,7 @@ def blend[D](
     merge_enum: MergeEnum = MergeEnum.Concat,
     yield_partials: bool = False,
 ) -> Iterator[D]:
-    """Base merge behavior on name only parameters.
+    """Merge behavior based on value of merge_enum parameter.
 
     :param iterables: Iterables to blend together.
     :param merge_enum: ``MergeEnum`` to determine merging behavior.

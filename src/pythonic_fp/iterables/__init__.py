@@ -1,4 +1,4 @@
-# Copyright 2023-2024 Geoffrey R. Scheller
+# Copyright 2023-2026 Geoffrey R. Scheller
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,30 +13,33 @@
 # limitations under the License.
 
 """
-Library of functions for iterating iterables
-============================================
+Tools for iterables
+-------------------
 
-+-----------+-------------------------------------------+
-| Module    | Description                               |
-+===========+===========================================+
-| merging   | Concatenating and merging iterables       |
-+-----------+-------------------------------------------+
-| drop_take | Dropping and taking values from iterables |
-+-----------+-------------------------------------------+
-| folding   | Reducing and accumulating iterables       |
-+-----------+-------------------------------------------+
+.. admonition:: Library of functions for iterating iterables
 
-Assumptions
------------
+    +-----------+-------------------------------------------+
+    | Module    | Description                               |
+    +===========+===========================================+
+    | merging   | Concatenating and merging iterables       |
+    +-----------+-------------------------------------------+
+    | drop_take | Dropping and taking values from iterables |
+    +-----------+-------------------------------------------+
+    | folding   | Reducing and accumulating iterables       |
+    +-----------+-------------------------------------------+
 
-- iterables are not necessarily iterators
-- at all times iterator protocol is assumed to be followed
+.. important::
 
-  - all iterators are assumed to be iterable
-  - for all iterators ``foobar`` we assume ``iter(foobar) is foobar``
+    **Assumptions:**
+
+    - iterables are not necessarily iterators
+    - at all times iterator protocol is assumed to be followed
+
+    - all iterators are assumed to be iterable
+    - for all iterators ``foobar`` we assume ``iter(foobar) is foobar``
 
 """
 
 __author__ = 'Geoffrey R. Scheller'
-__copyright__ = 'Copyright (c) 2023-2025 Geoffrey R. Scheller'
+__copyright__ = 'Copyright (c) 2023-2026 Geoffrey R. Scheller'
 __license__ = 'Apache License 2.0'
