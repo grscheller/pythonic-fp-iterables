@@ -18,15 +18,13 @@ Tools for iterables
 
 .. admonition:: Library of functions for iterating iterables
 
-    +-----------+-------------------------------------------+
-    | Module    | Description                               |
-    +===========+===========================================+
-    | merging   | Concatenating and merging iterables       |
-    +-----------+-------------------------------------------+
-    | drop_take | Dropping and taking values from iterables |
-    +-----------+-------------------------------------------+
-    | folding   | Reducing and accumulating iterables       |
-    +-----------+-------------------------------------------+
+    ============= =========================================
+    Module        Description
+    ============= =========================================
+    **merging**   Concatenating and merging iterables
+    **drop_take** Dropping and taking values from iterables
+    **folding**   Reducing and accumulating iterables
+    ============= =========================================
 
 .. important::
 
@@ -35,8 +33,8 @@ Tools for iterables
     - iterables are not necessarily iterators
     - at all times iterator protocol is assumed to be followed
 
-    - all iterators are assumed to be iterable
-    - for all iterators ``foobar`` we assume ``iter(foobar) is foobar``
+      - all iterators are assumed to be iterable
+      - for all iterators ``foobar`` we assume ``iter(foobar) is foobar``
 
 """
 
