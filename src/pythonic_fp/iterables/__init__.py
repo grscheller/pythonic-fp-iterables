@@ -18,13 +18,9 @@ Tools for iterables
 
 .. admonition:: Library of functions for iterating iterables
 
-    ============= =========================================
-    Module        Description
-    ============= =========================================
-    **merging**   Concatenating and merging iterables
-    **drop_take** Dropping and taking values from iterables
-    **folding**   Reducing and accumulating iterables
-    ============= =========================================
+    - module **merging:** - Concatenating and merging iterables.
+    - module **drop_take:** - Dropping and taking values from iterables.
+    - module **folding:** -  Reducing and accumulating iterables.
 
 .. important::
 
