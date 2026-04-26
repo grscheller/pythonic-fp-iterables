@@ -2,7 +2,8 @@ Pythonic FP - Tools for iterables
 =================================
 
 PyPI project
-`pythonic-fp.iterators <https://pypi.org/project/pythonic-fp.iterables>`_.
+`pythonic-fp-iterators
+<https://pypi.org/project/pythonic-fp-iterables>`_.
 
 Library of functions for iterating iterables.
 
@@ -19,7 +20,7 @@ Library of functions for iterating iterables.
 
 Part of the
 `pythonic-fp
-<https://grscheller.github.io/pythonic-fp>`_
+<https://grscheller.github.io/pythonic-fp/homepage/html/>`_
 PyPI projects.
 
 Documentation
@@ -27,10 +28,10 @@ Documentation
 
 Documentation for this project is hosted on
 `GitHub Pages
-<https://grscheller.github.io/pythonic-fp/iterables>`_.
+<https://grscheller.github.io/pythonic-fp-iterables>`_.
 
 Copyright and License
 ---------------------
 
-Copyright (c) 2023-2025 Geoffrey R. Scheller. Licensed under the Apache
+Copyright (c) 2023-2026 Geoffrey R. Scheller. Licensed under the Apache
 License, Version 2.0. See the LICENSE file for details.

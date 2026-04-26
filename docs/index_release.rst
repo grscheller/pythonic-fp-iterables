@@ -1,5 +1,5 @@
 pythonic-fp-iterables
----------------------
+=====================
 
 Project
 `pythonic-fp-iterables <https://pypi.org/project/pythonic-fp-iterables/>`_
