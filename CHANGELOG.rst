@@ -17,6 +17,12 @@ See `Semantic Versioning 2.0.0 <https://semver.org>`_.
 Releases and Important Milestones
 ---------------------------------
 
+Development Status Reappraisal - 2026-05-05
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Maintainer appraised the Development Status for
+pythonic-fp-iterables to be ``"5 - Production/Stable"``.
+
 PyPI 5.1.1 - 2025-08-02
 ~~~~~~~~~~~~~~~~~~~~~~~
 
