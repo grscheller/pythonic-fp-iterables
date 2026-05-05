@@ -1,5 +1,5 @@
-iterables.folding
------------------
+folding
+=======
 
 .. automodule:: pythonic_fp.iterables.folding
     :members:
