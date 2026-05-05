@@ -2,12 +2,12 @@ pythonic-fp-iterables
 =====================
 
 Project
-`pythonic-fp-iterables <https://pypi.org/project/pythonic-fp-iterables/>`_
+`Pythonic FP - Iterables <https://pypi.org/project/pythonic-fp-iterables/>`_
 one of the
 `Pythonic FP <https://grscheller.github.io/pythonic-fp/>`_
 PyPI projects.
 
-**Custom PyPI 0.0.0 release**
+|RELEASE_STRING|
 
 .. toctree::
     :caption: Overview
