@@ -13,12 +13,9 @@
 # limitations under the License.
 
 """
-Folding
--------
+.. admonition:: Folding and Accumulating
 
-.. admonition:: module pythonic_fp.iterables.folding
-
-    Functions to reduce and accumulate values from iterables.
+    Functions to reduce and accumulate items from iterables.
 
 """
 
@@ -42,17 +39,24 @@ __all__ = [
 def accumulate[D, L](
     iterable: Iterable[D], f: Callable[[L, D], L], initial: L | NoValue = NoValue()
 ) -> Iterator[L]:
-    """Returns an iterator of partial fold values.
+    """
+    .. admonition:: accumulate
 
-    A pure Python version of standard library's ``itertools.accumulate``
+        Returns an iterator of partial fold items. A pure Python
+        version of 
 
-    - function ``f`` does not default to addition (for typing flexibility)
-    - begins accumulation with an "optional" ``initial`` value
+        :param iterable: Iterable to be folded.
+        :param f: Two parameter function, first parameter for accumulated items.
+        :param initial: Optional ``initial`` item to start fold.
+        :yields: The intermediate folded items.
 
-    :param iterable: iterable to be folded
-    :param f: two parameter function, first parameter for accumulated value
-    :param initial: "optional" initial value to start fold
-    :return: an iterator of the intermediate fold values
+        .. note::
+
+            A pure Python implementation of the standard
+            library's ``itertools.accumulate``
+
+            - function ``f`` does not default to addition (for typing flexibility)
+            - begins accumulation with an optional ``initial`` item
 
     """
     it = iter(iterable)
@@ -80,21 +84,21 @@ def accumulate[D, L](
 
 
 def reduce_left[D](iterable: Iterable[D], f: Callable[[D, D], D]) -> D | Never:
-    """Fold an iterable left with a function.
+    """
+    .. admonition:: reduce left
 
-    .. Warning::
+        Fold an iterable left with a function.
 
-       This function never return if given an infinite iterable.
+        :param iterable: Iterable to be reduced (folded).
+        :param f: Two parameter function, first parameter for accumulated items.
+        :return: Reduced item from the iterable.
+        :raises StopIteration: When called on an empty iterable.
+        :raises Exception: Does not catch any exceptions from ``f``.
 
-    .. Warning::
+        .. warning::
 
-       This function does not catch or re-raises exceptions from ``f``.
-
-    :param iterable: iterable to be reduced (folded)
-    :param f: two parameter function, first parameter for accumulated value
-    :return: reduced value from the iterable
-    :raises StopIteration: when called on an empty iterable
-    :raises Exception: does not catch any exceptions from ``f``
+            - never returns if given an infinite iterable
+            - does not catch or re-raises exceptions raised by ``f``
 
     """
     it = iter(iterable)
@@ -113,24 +117,24 @@ def reduce_left[D](iterable: Iterable[D], f: Callable[[D, D], D]) -> D | Never:
 def fold_left[D, L](
     iterable: Iterable[D], f: Callable[[L, D], L], initial: L
 ) -> L | Never:
-    """Fold an iterable left with a function and initial value.
+    """
+    .. admonition:: fold left
 
-    - not restricted to ``__add__`` for the folding function
-    - initial value required, does not default to ``0`` for initial value
-    - handles non-numeric data just find
+        Fold an iterable left with a function and initial item.
 
-    .. Warning::
+        - not restricted to ``__add__`` for the folding function
+        - initial item is required, does not default to ``0``
+        - handles non-numeric data just find
 
-       This function never return if given an infinite iterable.
+        :param iterable: iterable to be folded
+        :param f: two parameter function, first parameter for accumulated item
+        :param initial: mandatory initial item to start fold
+        :return: the folded item
 
-    .. Warning::
+        .. warning::
 
-       This function does not catch any exceptions ``f`` may raise.
-
-    :param iterable: iterable to be folded
-    :param f: two parameter function, first parameter for accumulated value
-    :param initial: mandatory initial value to start fold
-    :return: the folded value
+            - never returns if given an infinite iterable
+            - does not catch or re-raises exceptions raised by ``f``
 
     """
     acc = initial
@@ -142,24 +146,24 @@ def fold_left[D, L](
 def maybe_fold_left[D, L](
     iterable: Iterable[D], f: Callable[[L, D], L], initial: L | NoValue = NoValue()
 ) -> MayBe[L] | Never:
-    """Folds an iterable left with an "optional" initial value..
+    """
+    .. admonition:: maybe fold left
 
-    - when an initial value is not given then ``L = D``
-    - if iterable empty and no ``initial`` value given, return ``MayBe()``
+        Folds an iterable left with an "optional" initial item.
 
-    .. Warning::
+        - when an initial item is not given then ``L = D``
+        - if iterable empty and no ``initial`` item given, return ``MayBe()``
 
-       This function never return if given an infinite iterable.
+        :param iterable: The iterable to be folded.
+        :param f: First argument is for the accumulated items.
+        :param initial: Mandatory initial item to start fold.
+        :return: ``MayBe`` of a successfully folded item,
+                 otherwise returns ``MayBe()``.
 
-    .. Warning::
+        .. warning::
 
-        This function returns a ``MayBe()`` when ``f`` raises any
-        exception what-so-ever. The exception is thrown away.
-
-    :param iterable: The iterable to be folded.
-    :param f: First argument is for the accumulated value.
-    :param initial: Mandatory initial value to start fold.
-    :return: MayBe of a successfully folded value, otherwise MayBe()
+            - never returns if given an infinite iterable
+            - any exception ``f`` raises is thrown away
 
     """
     acc: L
@@ -189,23 +193,33 @@ def sc_reduce_left[D](
     include_start: bool = True,
     include_stop: bool = True,
 ) -> tuple[MayBe[D], Iterator[D]]:
-    """Short circuit version of a left reduce.
+    """
+    .. admonition:: short circuit reduce left
 
-    Useful for infinite iterables.
+        Short circuit version of a left fold.
 
-    Behavior for default arguments will
+        :param iterable: Iterable to be reduced from the left.
+        :param f: Two parameter function, first parameter for
+                  the accumulator.
+        :param start: Delay starting the fold until it returns true.
+        :param stop: Prematurely stop the fold when it returns true.
+        :param include_start: If true, include starting item in fold.
+        :param include_stop: If true, include stopping item in fold.
+        :return: Tuple of a ``MayBe`` of the folded item and iterator
+                 of remaining iterables.
 
-    - left reduce finite iterable
-    - start folding immediately
-    - continue folding until end (of a possibly infinite iterable)
+        .. note::
 
-    :param iterable: iterable to be reduced from the left
-    :param f: two parameter function, first parameter for accumulated value
-    :param start: delay starting the fold until it returns true
-    :param stop: prematurely stop the fold when it returns true
-    :param include_start: if true, include fold starting value in fold
-    :param include_stop: if true, include stopping value in fold
-    :return: tuple of a MayBe of the folded value and iterator of remaining iterables
+            Behavior for default arguments will
+
+            - left reduce finite iterable
+            - start folding immediately
+            - continue folding until end (of a possibly infinite iterable)
+
+            .. tip::
+
+                Useful for infinite iterables when Callable ``stop``
+                is provided.
 
     """
     it_start = drop_while(iterable, negate(start))
@@ -241,23 +255,32 @@ def sc_reduce_right[D](
     include_start: bool = True,
     include_stop: bool = True,
 ) -> tuple[MayBe[D], Iterator[D]]:
-    """Short circuit version of a right reduce.
+    """
+    .. admonition:: short circuit reduce right
 
-    Useful for infinite and non-reversible iterables.
+        Short circuit version of a right fold.
 
-    Behavior for default arguments will
+        :param iterable: Iterable to be reduced from the right.
+        :param f: Two parameter function, second parameter for
+                  the accumulator.
+        :param start: Delay starting the fold until it returns true.
+        :param stop: Prematurely stop the fold when it returns true.
+        :param include_start: If true, include starting item.
+        :param include_stop: If true, include stopping item in fold.
+        :return: Tuple of a ``MayBe`` of the folded item and iterator
+                 of remaining iterables.
 
-    - right reduce finite iterable
-    - start folding at end (of a possibly infinite iterable)
-    - continue reducing right until beginning
+        .. note::
 
-    :param iterable: iterable to be reduced from the right
-    :param f: two parameter function, second parameter for accumulated value
-    :param start: delay starting the fold until it returns true
-    :param stop: prematurely stop the fold when it returns true
-    :param include_start: if true, include fold starting value in fold
-    :param include_stop: if true, include stopping value in fold
-    :return: tuple of a MayBe of the folded value and iterator of remaining iterables
+            Behavior for default arguments will
+
+            - right reduce finite iterable
+            - start folding at end (of a possibly infinite iterable)
+            - continue reducing right until beginning
+
+            .. tip::
+
+                Useful for infinite and non-reversible iterables.
 
     """
     it_start, it_rest = take_while_split(iterable, negate(start))

@@ -5,8 +5,8 @@
 #  - later needs to agree with pyproject.toml
 PROJECT_NAME = Iterables
 PYPI_NAME = iterables
-RELEASE_VERSION = 5.1.3
-DEVEL_VERSION = 5.1.4
+RELEASE_VERSION = 5.1.4
+DEVEL_VERSION = 5.1.5
 CUSTOM_VERSION = 0.0.0
 
 SPHINXOPTS ?=

@@ -17,31 +17,46 @@ See `Semantic Versioning 2.0.0 <https://semver.org>`_.
 Releases and Important Milestones
 ---------------------------------
 
+PyPI 5.1.4 release - 2025-08-02
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Documentation now in maintenance mode. Many docstring improvements.
+
 Development Status Reappraisal - 2026-05-05
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Maintainer appraised the Development Status for
 pythonic-fp-iterables to be ``"5 - Production/Stable"``.
 
-PyPI 5.1.1 - 2025-08-02
-~~~~~~~~~~~~~~~~~~~~~~~
+PyPI 5.1.3 release - 2026-01-18
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Docstring updates.
+
+PyPI 5.1.2 release - 2025-09-38
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Updated pyproject.toml for next consistent Pythonic FP release.
+
+PyPI 5.1.1 release - 2025-08-02
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Only docstring changes.
 
-PyPI 5.1.0 - 2025-08-02
-~~~~~~~~~~~~~~~~~~~~~~~
+PyPI 5.1.0 release - 2025-08-02
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - changed singletons -> sentinels
 - Removed "from __future__ import annotations"
 - Added .pyi files
 
-PyPI 5.0.0 - 2025-08-02
-~~~~~~~~~~~~~~~~~~~~~~~
+PyPI 5.0.0 release - 2025-08-02
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 General consistency tweaks and fixes across all pythonic-fp projects.
 
-PyPI 4.0.0 - 2025-07-16
-~~~~~~~~~~~~~~~~~~~~~~~
+PyPI 4.0.0 release - 2025-07-16
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Primary purpose was to bring Sphinx documentation in alignment
 with other pythonic-fp projects. Ended up making substantial
@@ -52,15 +67,15 @@ for the other pythonic-fp projects.
 
   - renamed pythonic_fp.iterables.foldl to pythonic_fp.iterables.fold_left
 
-PyPI 3.0.0 - 2025-07-06
-~~~~~~~~~~~~~~~~~~~~~~~
+PyPI 3.0.0 release - 2025-07-06
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 First PyPI release as ``pythonic-fp.iterables``
 
 - dropping dtools namespace name because there is a repo by that name.
 
-PyPI 2.0.0 - 2025-05-22
-~~~~~~~~~~~~~~~~~~~~~~~
+PyPI 2.0.0 release - 2025-05-22
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - Moved dtools.fp.iterables to its own PyPI project
 
@@ -74,8 +89,8 @@ PyPI 2.0.0 - 2025-05-22
 
     - will import dtools.fp.lazy directly for this functionality
 
-PyPI 1.7.0 - 2025-04-22
-~~~~~~~~~~~~~~~~~~~~~~~
+PyPI 1.7.0 release - 2025-04-22
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Last PyPI release as dtools.fp
 
@@ -84,21 +99,21 @@ Last PyPI release as dtools.fp
 - docstring changes
 - pyproject.toml standardization
 
-PyPI 1.6.0 - 2025-04-07
-~~~~~~~~~~~~~~~~~~~~~~~
+PyPI 1.6.0 release - 2025-04-07
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - typing improvements
 
-PyPI 1.4.0 - 2025-03-16
-~~~~~~~~~~~~~~~~~~~~~~~
+PyPI 1.4.0 release - 2025-03-16
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - much work dtools.iterables
 
   - finally implemented scReduceL and scReduceR functions
   - tweaked API across iterables module
 
-PyPI 1.3.0 - 2025-01-17
-~~~~~~~~~~~~~~~~~~~~~~~
+PyPI 1.3.0 release - 2025-01-17
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 First release as dtools.fp
 
@@ -107,24 +122,24 @@ Repo name changes.
 - GitHub: fp -> dtools-fp
 - PyPI: grscheller.fp -> dtools.fp
 
-PyPI 1.0.1 - 2024-10-20
-~~~~~~~~~~~~~~~~~~~~~~~
+PyPI 1.0.1 release - 2024-10-20
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - removed docs from repo
 - docs for all grscheller namespace projects maintained here
  
   - https://grscheller.github.io/grscheller-pypi-namespace-docs/
 
-PyPI 1.0.0 - 2024-10-18
-~~~~~~~~~~~~~~~~~~~~~~~
+PyPI 1.0.0 release - 2024-10-18
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Decided to make this release first stable release.
 
 - renamed module fp.woException to fp.err_handling
 - pytest improvements based on pytest documentation
 
-PyPI 0.4.0 - 2024-10-03
-~~~~~~~~~~~~~~~~~~~~~~~
+PyPI 0.4.0 release - 2024-10-03
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Long overdue PyPI release.
 
@@ -172,8 +187,8 @@ Added ``foldL_sc``, shortcut version of foldL,
 to fp.iterables.
 
 
-PyPI 0.3.1 - 2024-08-20
-~~~~~~~~~~~~~~~~~~~~~~~
+PyPI 0.3.1 release - 2024-08-20
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Now fp.iterables no longer exports ``CONCAT``, ``MERGE``, ``EXHAUST``.
 
@@ -182,8 +197,8 @@ Now fp.iterables no longer exports ``CONCAT``, ``MERGE``, ``EXHAUST``.
   - grscheller.datastructures.ftuple
   - grscheller.datastructures.split_ends
 
-PyPI 0.2.0 - 2024-07-26
-~~~~~~~~~~~~~~~~~~~~~~~
+PyPI 0.2.0 release - 2024-07-26
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - from last PyPI release
 
@@ -191,8 +206,8 @@ PyPI 0.2.0 - 2024-07-26
 
 - overall much better docstrings
 
-PyPI 0.1.0 - 2024-07-11
-~~~~~~~~~~~~~~~~~~~~~~~
+PyPI 0.1.0 release - 2024-07-11
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Initial PyPI release as grscheller.fp
 

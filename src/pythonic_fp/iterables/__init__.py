@@ -13,9 +13,6 @@
 # limitations under the License.
 
 """
-Tools for iterables
--------------------
-
 .. admonition:: Composing and iterating iterables
 
     - module **merging:** Concatenating and merging iterables.

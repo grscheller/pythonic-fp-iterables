@@ -13,10 +13,7 @@
 # limitations under the License.
 
 """
-Merging Iterables
------------------
-
-.. admonition:: module pythonic_fp.iterables.merging
+.. admonition:: Merging iterables
 
     Functions to merge multiple iterables together into one.
 
@@ -35,98 +32,112 @@ __all__ = [
 
 
 class MergeEnum(Enum):
-    """Iterable Blending Enums.
+    """
+    .. admonition:: Iterable Blending Enums.
 
-    - **MergeEnum.Concat:** Concatenate first to last
-    - **MergeEnum.Merge:** Merge until one is exhausted
-    - **MergeEnum.Exhaust:** Merge until all are exhausted
+        - **MergeEnum.Concat:** Concatenate first to last
+        - **MergeEnum.Merge:** Merge until one is exhausted
+        - **MergeEnum.Exhaust:** Merge until all are exhausted
 
     """
-
     Concat = auto()
     Merge = auto()
     Exhaust = auto()
 
 
 def concat[D](*iterables: Iterable[D]) -> Iterator[D]:
-    """Sequentially concatenate multiple iterables together.
+    """
+    .. admonition:: concatenate iterables
 
-    .. warning::
-        An infinite iterable will prevent subsequent iterables from
-        yielding any values.
+        Sequentially concatenate multiple iterables.
 
-    .. note::
+        :param iterables: Iterables to concatenate.
+        :yields: The concatenated items from all the iterables.
 
-        Performant to the standard library's ``itertools.chain``.
+        .. warning::
+            An infinite iterable will prevent subsequent iterables from
+            yielding any items.
 
-    :param iterables: Iterables to concatenate.
-    :returns: Iterator of concatenated values from the iterables.
+        .. note::
+
+            Performant to the standard library's ``itertools.chain``.
 
     """
     for iterator in map(lambda x: iter(x), iterables):
         while True:
             try:
-                value = next(iterator)
-                yield value
+                item = next(iterator)
+                yield item
             except StopIteration:
                 break
 
 
 def merge[D](*iterables: Iterable[D], yield_partials: bool = False) -> Iterator[D]:
-    """Merge together ``iterables`` until one is exhausted.
+    """
+    .. admonition:: merge iterables
 
-    .. note::
+        Merge multiple iterables until one is exhausted.
 
-        When ``yield_partials`` is true, then any unmatched values from other iterables
-        already yielded when the first iterable is exhausted are yielded. This prevents
-        data lose if any of the iterables are iterators with external references.
+        :param iterables: Iterables to merge until one gets exhausted.
+        :param yield_partials: Yield any unpaired yielded items from other iterables.
+        :yields: Merged items from the iterables until one of the
+                 iterables is exhausted.
 
-    :param iterables: Iterables to merge until one gets exhausted.
-    :param yield_partials: Yield any unpaired yielded values from other iterables.
-    :returns: Iterator of merged values from the iterables until one is exhausted.
+        .. note::
+
+            When ``yield_partials`` is true, then any unmatched items
+            from other iterables already yielded when the first iterable
+            is exhausted are yielded.
+
+            This prevents data lose if any of the iterables are
+            iterators with external references.
 
     """
     iter_list = list(map(lambda x: iter(x), iterables))
-    values = []
+    items = []
     if (num_iters := len(iter_list)) > 0:
         while True:
             try:
                 for ii in range(num_iters):
-                    values.append(next(iter_list[ii]))
-                yield from values
-                values.clear()
+                    items.append(next(iter_list[ii]))
+                yield from items
+                items.clear()
             except StopIteration:
                 break
         if yield_partials:
-            yield from values
+            yield from items
 
 
 def exhaust[D](*iterables: Iterable[D]) -> Iterator[D]:
-    """Merge together multiple iterables until all are exhausted.
+    """
+    .. admonition:: exhaustively merge iterables
 
-    :param iterables: Iterables to exhaustively merge.
-    :returns: Iterator of merged values from the iterables until all are exhausted.
+        Merge multiple iterables until all are exhausted.
+
+        :param iterables: Iterables to exhaustively merge.
+        :yields: Merged items from the iterables until all of the
+                 iterables are exhausted.
 
     """
     iter_list = list(map(lambda x: iter(x), iterables))
     if (num_iters := len(iter_list)) > 0:
         ii = 0
-        values = []
+        items = []
         while True:
             try:
                 while ii < num_iters:
-                    values.append(next(iter_list[ii]))
+                    items.append(next(iter_list[ii]))
                     ii += 1
-                yield from values
+                yield from items
                 ii = 0
-                values.clear()
+                items.clear()
             except StopIteration:
                 num_iters -= 1
                 if num_iters < 1:
                     break
                 del iter_list[ii]
 
-        yield from values
+        yield from items
 
 
 def blend[D](
@@ -134,13 +145,16 @@ def blend[D](
     merge_enum: MergeEnum = MergeEnum.Concat,
     yield_partials: bool = False,
 ) -> Iterator[D]:
-    """Merge behavior based on value of merge_enum parameter.
+    """
+    .. admonition:: merge iterables
 
-    :param iterables: Iterables to blend together.
-    :param merge_enum: ``MergeEnum`` to determine merging behavior.
-    :param yield_partials: Yield unpaired values from other iterables.
-    :returns: An iterator of type ``D``.
-    :raises ValueError: When an unknown ``MergeEnum`` is given.
+        Merge behavior based on value of merge_enum parameter.
+
+        :param iterables: Iterables to blend together.
+        :param merge_enum: ``MergeEnum`` to determine merging behavior.
+        :param yield_partials: Yield unpaired items from other iterables.
+        :yields: Items from all iterables blended together.
+        :raises ValueError: When an unknown ``MergeEnum`` is given.
 
     """
     match merge_enum:
