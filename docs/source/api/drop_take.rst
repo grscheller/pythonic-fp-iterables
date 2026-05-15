@@ -1,5 +1,5 @@
-drop_take
-=========
+drop and take
+=============
 
 .. automodule:: pythonic_fp.iterables.drop_take
     :members:
