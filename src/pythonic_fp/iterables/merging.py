@@ -35,9 +35,9 @@ class MergeEnum(Enum):
     """
     .. admonition:: Iterable Blending Enums.
 
-        - **MergeEnum.Concat:** Concatenate first to last
-        - **MergeEnum.Merge:** Merge until one is exhausted
-        - **MergeEnum.Exhaust:** Merge until all are exhausted
+        - **Concat:** Concatenate first to last
+        - **Merge:** Merge until one is exhausted
+        - **Exhaust:** Merge until all are exhausted
 
     """
     Concat = auto()
@@ -76,7 +76,7 @@ def merge[D](*iterables: Iterable[D], yield_partials: bool = False) -> Iterator[
     """
     .. admonition:: merge iterables
 
-        Merge multiple iterables until one is exhausted.
+        Merge multiple iterables until one of them is exhausted.
 
         :param iterables: Iterables to merge until one gets exhausted.
         :param yield_partials: Yield any unpaired yielded items from other iterables.
@@ -112,7 +112,7 @@ def exhaust[D](*iterables: Iterable[D]) -> Iterator[D]:
     """
     .. admonition:: exhaustively merge iterables
 
-        Merge multiple iterables until all are exhausted.
+        Merge multiple iterables until all of them are exhausted.
 
         :param iterables: Iterables to exhaustively merge.
         :yields: Merged items from the iterables until all of the
@@ -149,6 +149,10 @@ def blend[D](
     .. admonition:: merge iterables
 
         Merge behavior based on value of merge_enum parameter.
+
+        - Concat: Concatenate first to last
+        - Merge: Merge until one is exhausted
+        - Exhaust: Merge until all are exhausted
 
         :param iterables: Iterables to blend together.
         :param merge_enum: ``MergeEnum`` to determine merging behavior.

@@ -42,11 +42,11 @@ def accumulate[D, L](
     """
     .. admonition:: accumulate
 
-        Returns an iterator of partial fold items. A pure Python
-        version of 
+        Returns an iterator of partially folded items.
 
         :param iterable: Iterable to be folded.
-        :param f: Two parameter function, first parameter for accumulated items.
+        :param f: Two parameter function, first parameter is for
+                  the accumulator.
         :param initial: Optional ``initial`` item to start fold.
         :yields: The intermediate folded items.
 
@@ -90,7 +90,8 @@ def reduce_left[D](iterable: Iterable[D], f: Callable[[D, D], D]) -> D | Never:
         Fold an iterable left with a function.
 
         :param iterable: Iterable to be reduced (folded).
-        :param f: Two parameter function, first parameter for accumulated items.
+        :param f: Two parameter function, first parameter is for
+                  the accumulator.
         :return: Reduced item from the iterable.
         :raises StopIteration: When called on an empty iterable.
         :raises Exception: Does not catch any exceptions from ``f``.
@@ -98,7 +99,7 @@ def reduce_left[D](iterable: Iterable[D], f: Callable[[D, D], D]) -> D | Never:
         .. warning::
 
             - never returns if given an infinite iterable
-            - does not catch or re-raises exceptions raised by ``f``
+            - does not catch or re-raise exceptions raised by ``f``
 
     """
     it = iter(iterable)
@@ -126,10 +127,11 @@ def fold_left[D, L](
         - initial item is required, does not default to ``0``
         - handles non-numeric data just find
 
-        :param iterable: iterable to be folded
-        :param f: two parameter function, first parameter for accumulated item
-        :param initial: mandatory initial item to start fold
-        :return: the folded item
+        :param iterable: Iterable to be folded.
+        :param f: Two parameter function, first parameter is for
+                  the accumulator.
+        :param initial: Mandatory initial item to start fold
+        :return: The folded item.
 
         .. warning::
 
@@ -155,7 +157,7 @@ def maybe_fold_left[D, L](
         - if iterable empty and no ``initial`` item given, return ``MayBe()``
 
         :param iterable: The iterable to be folded.
-        :param f: First argument is for the accumulated items.
+        :param f: First argument is for the accumulator.
         :param initial: Mandatory initial item to start fold.
         :return: ``MayBe`` of a successfully folded item,
                  otherwise returns ``MayBe()``.
@@ -199,7 +201,7 @@ def sc_reduce_left[D](
         Short circuit version of a left fold.
 
         :param iterable: Iterable to be reduced from the left.
-        :param f: Two parameter function, first parameter for
+        :param f: Two parameter function, first parameter is for
                   the accumulator.
         :param start: Delay starting the fold until it returns true.
         :param stop: Prematurely stop the fold when it returns true.
@@ -261,7 +263,7 @@ def sc_reduce_right[D](
         Short circuit version of a right fold.
 
         :param iterable: Iterable to be reduced from the right.
-        :param f: Two parameter function, second parameter for
+        :param f: Two parameter function, second parameter is for
                   the accumulator.
         :param start: Delay starting the fold until it returns true.
         :param stop: Prematurely stop the fold when it returns true.

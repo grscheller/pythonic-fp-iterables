@@ -27,7 +27,7 @@
     - at all times iterator protocol is assumed to be followed
 
       - all iterators are assumed to be iterable
-      - for all iterators ``foobar`` we assume ``iter(foobar) is foobar``
+      - for all iterators ``foo`` we assume ``iter(foo) is foo``
 
 """
 

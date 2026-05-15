@@ -74,7 +74,7 @@ def drop_while[D](iterable: Iterable[D], pred: Callable[[D], bool]) -> Iterator[
         Drop initial items from iterable while predicate is true.
 
         :param iterable: Iterable whose items are to be dropped.
-        :param pred: Single argument Boolean items function, the "predicate".
+        :param pred: Single argument Boolean valued function.
         :yields: items starting when ``pred`` returns ``False``.
 
     """
@@ -117,7 +117,7 @@ def take_while[D](iterable: Iterable[D], pred: Callable[[D], bool]) -> Iterator[
         Return an iterator of items until predicate false.
 
         :param iterable: Iterable providing the items to be taken.
-        :param pred: Single argument Boolean valued function, the "predicate".
+        :param pred: Single argument Boolean valued function.
         :yields: Items from iterable while predicate is true.
 
         .. warning::
@@ -146,7 +146,7 @@ def take_split[D](iterable: Iterable[D], n: int) -> tuple[Iterator[D], Iterator[
 
         .. admonition:: CONTRACT
 
-            **CONTRACT:** Do not access the second iterator until
+            **IMPORTANT:** Do not access the second iterator until
             the first one is completely exhausted.
 
         :param iterable: Iterable providing the items to be taken.
@@ -172,7 +172,7 @@ def take_while_split[D](
 
         .. admonition:: CONTRACT
 
-            **CONTRACT:** Do not access the second iterator until
+            **IMPORTANT:** Do not access the second iterator until
             the first one is completely exhausted.
 
         :param iterable: Iterable providing the items to be taken.
