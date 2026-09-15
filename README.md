@@ -4,7 +4,6 @@ Library of functions for iterating iterables.
 
 PyPI project
 [pythonic-fp-iterators](https://pypi.org/project/pythonic-fp-iterables).
-
 Part of the
 [pythonic-fp](https://grscheller.github.io/pythonic-fp/)
 PyPI projects.
