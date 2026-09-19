@@ -31,6 +31,7 @@ description = "Composing and iterating iterables."
 
 [project.urls]
 Changelog = "https://github.com/grscheller/pythonic-fp-iterables/blob/main/CHANGELOG.md"
+Documentation ="https://grscheller.github.io/pythonic-fp-iterables/release/html/"
 Homepage = "https://grscheller.github.io/pythonic-fp/"
 Source = "https://github.com/grscheller/pythonic-fp-iterables"
 
