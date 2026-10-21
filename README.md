@@ -5,13 +5,13 @@ Library of functions for iterating iterables.
 PyPI project
 [pythonic-fp-iterators](https://pypi.org/project/pythonic-fp-iterables).
 Part of the
-[pythonic-fp](https://grscheller.github.io/pythonic-fp/)
+[pythonic-fp](https://grscheller.github.io/pythonic-fp)
 PyPI projects.
 
 ## Documentation
 
 Documentation and other links for this project are hosted on
-[GitHub Pages](https://grscheller.github.io/pythonic-fp/projects/iterables.html).
+[GitHub Pages](https://grscheller.github.io/pythonic-fp-iterables).
 
 - Concatenating and merging iterables
 - Dropping and taking values from iterables
@@ -20,7 +20,7 @@ Documentation and other links for this project are hosted on
   - iterables are not necessarily iterators
   - at all times iterator protocol is assumed to be followed
     - all iterators are assumed to be iterable
-    - for all iterators ``foo`` we assume ``iter(foo) is foo``
+    - for all iterators `foo` we assume `iter(foo)` is `foo`
 
 ## Copyright and License
 
