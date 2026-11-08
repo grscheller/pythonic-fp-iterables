@@ -34,7 +34,9 @@
 """
 
 from collections.abc import Callable, Iterable, Iterator
+
 from pythonic_fp.gadgets.box import Box
+
 from .merging import concat
 
 __all__ = [

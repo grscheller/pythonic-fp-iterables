@@ -20,10 +20,13 @@
 """
 
 from collections.abc import Callable, Iterable, Iterator
-from typing import cast, Never
+from typing import cast
+
 from pythonic_fp.fptools.function import negate, swap
 from pythonic_fp.fptools.maybe import MayBe
+from pythonic_fp.fptools.recoverable import RECOVERABLE
 from pythonic_fp.gadgets.sentinels.novalue import NoValue
+
 from .drop_take import drop_while, take_while_split
 
 __all__ = [
@@ -34,10 +37,11 @@ __all__ = [
     'sc_reduce_left',
     'sc_reduce_right',
 ]
+novalue = NoValue()
 
 
 def accumulate[D, L](
-    iterable: Iterable[D], f: Callable[[L, D], L], initial: L | NoValue = NoValue()
+    iterable: Iterable[D], f: Callable[[L, D], L], initial: L | NoValue = novalue
 ) -> Iterator[L]:
     """
     .. admonition:: accumulate
@@ -83,7 +87,7 @@ def accumulate[D, L](
             yield acc
 
 
-def reduce_left[D](iterable: Iterable[D], f: Callable[[D, D], D]) -> D | Never:
+def reduce_left[D](iterable: Iterable[D], f: Callable[[D, D], D]) -> D:
     """
     .. admonition:: reduce left
 
@@ -117,7 +121,7 @@ def reduce_left[D](iterable: Iterable[D], f: Callable[[D, D], D]) -> D | Never:
 
 def fold_left[D, L](
     iterable: Iterable[D], f: Callable[[L, D], L], initial: L
-) -> L | Never:
+) -> L:
     """
     .. admonition:: fold left
 
@@ -146,8 +150,8 @@ def fold_left[D, L](
 
 
 def maybe_fold_left[D, L](
-    iterable: Iterable[D], f: Callable[[L, D], L], initial: L | NoValue = NoValue()
-) -> MayBe[L] | Never:
+    iterable: Iterable[D], f: Callable[[L, D], L], initial: L | NoValue = novalue
+) -> MayBe[L]:
     """
     .. admonition:: maybe fold left
 
@@ -181,7 +185,7 @@ def maybe_fold_left[D, L](
     for v in it:
         try:
             acc = f(acc, v)
-        except Exception:
+        except RECOVERABLE:
             return MayBe()
 
     return MayBe(acc)

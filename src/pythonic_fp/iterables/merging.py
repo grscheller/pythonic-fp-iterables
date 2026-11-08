@@ -20,7 +20,7 @@
 """
 
 from collections.abc import Iterable, Iterator
-from enum import auto, Enum
+from enum import Enum, auto
 
 __all__ = [
     'MergeEnum',
@@ -63,7 +63,7 @@ def concat[D](*iterables: Iterable[D]) -> Iterator[D]:
             Performant to the standard library's ``itertools.chain``.
 
     """
-    for iterator in map(lambda x: iter(x), iterables):
+    for iterator in (iter(x) for x in iterables):
         while True:
             try:
                 item = next(iterator)
@@ -93,7 +93,7 @@ def merge[D](*iterables: Iterable[D], yield_partials: bool = False) -> Iterator[
             iterators with external references.
 
     """
-    iter_list = list(map(lambda x: iter(x), iterables))
+    iter_list = [iter(x) for x in iterables]
     items = []
     if (num_iters := len(iter_list)) > 0:
         while True:
@@ -119,7 +119,7 @@ def exhaust[D](*iterables: Iterable[D]) -> Iterator[D]:
                  iterables are exhausted.
 
     """
-    iter_list = list(map(lambda x: iter(x), iterables))
+    iter_list = [iter(x) for x in iterables]
     if (num_iters := len(iter_list)) > 0:
         ii = 0
         items = []
